@@ -1,0 +1,162 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+    text-align: center;
+}
+
+/* DISEÑO DEL NAV */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #553d2a;
+  color: white;
+  height: 55px;
+  padding: 0px 20px;
+  gap: 10px;
+}
+
+.titulo {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#barraBusqueda {
+  padding: 8px;
+  width: 240px;
+  border: none;
+  border-radius: 3px;
+  margin: 0 10px;
+}
+
+
+/* DISEÑO DEL NAV */
+
+
+/* DISEÑO DE LAS CARTAS DE PRODUCTOS*/
+.card-producto img{
+    width: 80px;
+    height: 80px;
+}
+
+.card-producto{
+    width: 200px;
+    height: 200px;
+    padding: 5px;
+    border: #d0d0d0 solid 2px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+.card-producto p{
+  margin: 3px;
+  font-size: 12px;
+}
+
+.card-producto button {
+  width: 65%;
+  height: 32px;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  background-color: #553d2a;
+  color: white;
+}
+
+/* DISEÑO DE LAS CARTAS DE PRODUCTOS*/
+
+#contenedorFrutas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 16px;
+}
+
+/* DISEÑO DEL CARRITO */
+
+#contenedorCarrito {
+  width: 100%;
+  background-color: #f7f8fa;
+  border: #d0d0d0 2px solid;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+#contenedorCarrito li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+}
+
+
+.total-contenedor {
+    align-self: flex-end; 
+    margin-top: auto; 
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 0;
+    margin-right: 20px;
+}
+
+#contenedorCarrito li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 640px;
+}
+
+/* DISEÑO DEL CARRITO */
+
+/* DISEÑO BOTONES DEL CARRITO */
+
+.boton-eliminar {
+  width: 10%;
+  height: 32px;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+}
+
+.boton-vaciar {
+  align-self: flex-start;
+  width: 6%;
+  height: 32px;
+  border: none;
+  padding: 5px 8px;
+  margin-left: 20px;
+  border-radius: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+}
+
+/* DISEÑO BOTONES DEL CARRITO */

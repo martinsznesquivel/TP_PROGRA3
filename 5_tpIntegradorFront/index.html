@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/main.js" defer></script>
+    <title>Simulacro</title>
+  </head>
+  <body>
+
+    <header>
+        <nav>
+            <span class="titulo">Fruteria</span>
+            <div>
+                <span id="nombreAlumno"></span>
+                <input id="barraBusqueda" type="text", placeholder="Buscar...">
+            </div>
+            <span id="contadorCarrito">Carrito: 0 productos</span>
+        </nav>
+    </header>
+    <main>
+        <h2>Nuestras frutas</h2>
+        <div class="botones-orden">
+            <button onclick="ordenarPorNombre()">Ordenar por nombre</button>
+            <button onclick="ordenarPorPrecio()">Ordenar por precio</button>
+        </div>
+        <section id="contenedorFrutas"></section>
+        <aside id="contenedorCarrito">
+            <div id="totalCarrito"></div>
+        </aside>
+    </main>    
+  </body>
+</html>
