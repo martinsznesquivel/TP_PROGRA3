@@ -1,5 +1,5 @@
 //array de productos
-
+/*
 const frutas = [
   { id: 1, nombre: "arandano", precio: 5000, ruta_img: "img/arandano.jpg" },
   { id: 2, nombre: "banana", precio: 1000, ruta_img: "img/banana.jpg" },
@@ -198,4 +198,6 @@ function init(){
 init();
 
 
+
+*/
 

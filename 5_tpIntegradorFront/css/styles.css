@@ -160,3 +160,27 @@ nav {
 }
 
 /* DISEÑO BOTONES DEL CARRITO */
+
+#contenedor-productos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-producto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid;
+  width: 175px;
+  height: 200px;
+  margin: 5px;
+  font: 12px;
+  text-align: center;
+}
+
+.card-producto img {
+  margin-top: 10px;
+  
+}
+
