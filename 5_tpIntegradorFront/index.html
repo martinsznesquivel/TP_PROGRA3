@@ -10,7 +10,17 @@
   <body>
 
     <header>
-        <nav>
+      
+        <nav class="nav-principal">
+            <span class="titulo">Musical shop</span>
+            <div>
+                <span id="nombreAlumno"></span>
+                <input id="barraBusqueda" type="text", placeholder="Buscar...">
+            </div>
+            <span id="contadorCarrito">Carrito: 0 productos</span>
+        </nav>
+
+        <nav class="nav-secundario">
           <ul>
             <a href="index.html">
               <li>Ver</li>
@@ -25,12 +35,6 @@
               <li>Modificar</li>
             </a>
           </ul>
-            <span class="titulo">Musical shop</span>
-            <div>
-                <span id="nombreAlumno"></span>
-                <input id="barraBusqueda" type="text", placeholder="Buscar...">
-            </div>
-            <span id="contadorCarrito">Carrito: 0 productos</span>
         </nav>
     </header>
 
@@ -40,9 +44,7 @@
             <button onclick="ordenarPorNombre()">Ordenar por nombre</button>
             <button onclick="ordenarPorPrecio()">Ordenar por precio</button>
         </div>
-        <section id="contenedorFrutas"></section>
-        <aside id="contenedorCarrito"> 
-            <div id="totalCarrito"></div>
+        <div id="totalCarrito"></div>
         </aside>
         <div id="contenedor-productos"></div>
     </main> 
