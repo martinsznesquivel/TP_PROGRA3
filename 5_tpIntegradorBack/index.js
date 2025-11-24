@@ -1,7 +1,7 @@
 import express from "express";
 const app = express();
 
-import cors from "cors";
+import cors from "cors"; // Importamos cors para poder usar sus metodos y permitir solicitudes de otras aplicaciones hacia nuestra api
 app.use(cors()); // Middleware basico que permite todas las solicitudes
 
 import environments from "./src/api/config/environments.js";
