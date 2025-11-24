@@ -25,7 +25,7 @@
               <li>Modificar</li>
             </a>
           </ul>
-            <span class="titulo">Fruteria</span>
+            <span class="titulo">Musical shop</span>
             <div>
                 <span id="nombreAlumno"></span>
                 <input id="barraBusqueda" type="text", placeholder="Buscar...">
@@ -33,16 +33,72 @@
             <span id="contadorCarrito">Carrito: 0 productos</span>
         </nav>
     </header>
+
     <main>
-        <h2>Nuestras frutas</h2>
+        <h2>Lista de productos</h2>
         <div class="botones-orden">
             <button onclick="ordenarPorNombre()">Ordenar por nombre</button>
             <button onclick="ordenarPorPrecio()">Ordenar por precio</button>
         </div>
         <section id="contenedorFrutas"></section>
-        <aside id="contenedorCarrito">
+        <aside id="contenedorCarrito"> 
             <div id="totalCarrito"></div>
         </aside>
-    </main>    
+        <div id="contenedor-productos"></div>
+    </main> 
+        
+    <script>
+      // Seleccionamos el elemento al que le vamos a inyectar el html
+      let contenedorProductos = document.getElementById("contenedor-productos");
+      const url = "http://localhost:3000/productos" // guardamos en la variable url nuestro endpoint
+
+      async function obtenerProductos (){
+        try {
+          let respuesta = await fetch(url) // Hacemos una peticion al nuevo endpoint
+
+          let data = await respuesta.json()
+
+          console.log(data);
+
+          let productos = data.payload; // guardamos en la variable producto el array de productos que contiene payload
+
+          console.table(productos);
+
+          mostrarProductos(productos);
+
+
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      function mostrarProductos(array){
+        console.table(array); // Recibimos en formato tabla los productos que nos manda la funcion obtenerProductos
+      
+        let htmlProducto = "";
+
+        array.forEach(producto => {
+          htmlProducto += `
+              <div class="card-producto">
+                  <img src="${producto.imagen}" alt="${producto.nombre}">
+                  <h5>${producto.nombre}</h5>
+                  <p>ID: ${producto.id}</p>
+                  <p>$${producto.precio}</p>
+            </div>
+          `;
+        });
+
+        contenedorProductos.innerHTML = htmlProducto;
+      }
+      
+
+      function init(){
+        obtenerProductos();
+        mostrarProductos();
+      }
+
+      init();
+
+    </script>
   </body>
 </html>
