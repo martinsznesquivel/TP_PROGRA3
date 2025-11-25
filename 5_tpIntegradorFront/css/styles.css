@@ -214,3 +214,35 @@ nav {
   cursor: pointer;
 
 }
+
+/* DISEÑO PARA EL FORMULARIO DE CREACION */
+
+.products-form-amplio {
+    display: grid;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.products-form-amplio label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.products-form-amplio input[type="text"],
+.products-form-amplio input[type="number"],
+.products-form-amplio select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; 
+}
+
+.products-form-amplio input:focus,
+.products-form-amplio select:focus {
+    border-color: #553d2a; 
+}
+
