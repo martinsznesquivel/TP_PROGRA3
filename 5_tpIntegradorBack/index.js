@@ -40,6 +40,25 @@ app.get("/productos", async (req, res) => {
   }
 });
 
+//Eliminar producto por id
+app.delete("/productos/:id", async (req, res) => {
+    try{
+        const {id} = req.params;
+        const sql = "DELETE FROM productos WHERE ID = ?";
+        const [resultado] = await connection.query(sql,[id]);
+
+        res.status(200).json({ message: "Producto eliminado correctamente" });
+        
+        
+
+       // console.log(rows);
+
+    } catch (error) {
+        console.error("Error eliminando producto", error.message);
+        res.status(500).json({ message: "Error interno al eliminar producto" });
+        
+    }
+})
 app.listen(PORT, () => {
   console.log(`Servidor corriendo desde el puerto ${PORT}`);
 });
