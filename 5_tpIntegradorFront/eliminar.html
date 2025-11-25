@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/styles.css" />
+        <script src="js/main.js" defer></script>
+        <title>Simulacro</title>
+    </head>
+
+    <body>
+    <header>
+        <nav class="nav-principal">
+            <span class="titulo">Musical shop</span>
+            <div>
+                <span id="nombreAlumno"></span>
+                <input id="barraBusqueda" type="text", placeholder="Buscar...">
+            </div>
+            <span id="contadorCarrito">Carrito: 0 productos</span>
+        </nav>
+        <nav class="nav-secundario">
+        <ul>
+            <a href="index.html">
+                <li>Ver</li>
+            </a>
+            <a href="consultar.html">
+                <li>Consultar ID</li>
+            </a>
+            <a href="crear.html">
+                <li>Crear</li>
+            </a>
+            <a href="modificar.html">
+                <li>Modificar</li>
+            </a>
+            <a href="eliminar.html">
+                <li>Eliminar</li>
+            </a>
+        </ul>
+    </nav>
+    </header>
+
+    <main>
+        <h2>Lista de productos</h2>
+
+        <section>
+            <h3>Eliminar por ID</h3>
+            <input type="number" id="idEliminar" placeholder="ID a eliminar">
+            <button onclick="eliminarProducto()">Eliminar producto</button>
+        </section>
+
+        <div id="totalCarrito"></div>
+        <div id="contenedor-productos"></div>
+    </main> 
+        
+        <script>
+            let contenedorProductos = document.getElementById("contenedor-productos");
+            const url = "http://localhost:3000/productos";
+
+            async function obtenerProductos (){
+            try {
+                let respuesta = await fetch(url);
+
+                let data = await respuesta.json();
+                let productos = data.payload;
+
+                mostrarProductos(productos);
+
+            } catch (error) {
+                console.error(error);
+            }
+            }
+
+            function mostrarProductos(array){
+            let htmlProducto = "";
+
+            array.forEach(producto => {
+            htmlProducto += `
+                    <div class="card-producto">
+                        <img src="${producto.imagen}" alt="${producto.nombre}">
+                        <h5>${producto.nombre}</h5>
+                        <p>ID: ${producto.id}</p>
+                        <p>$${producto.precio}</p>
+                </div>
+            `;
+            });
+
+            contenedorProductos.innerHTML = htmlProducto;
+            }
+
+
+            async function eliminarProducto() {
+            const id = document.getElementById("idEliminar").value;
+
+                if (!id) {
+                    alert("Por favor ingresa un ID válido.");
+                    return;
+                }
+
+                try {
+                const respuesta = await fetch(`${url}/${id}`, {
+                    method: "DELETE",
+                });
+
+                if (!respuesta.ok) {
+                alert("No se encontró un producto con ese ID.");
+                return;
+                }
+
+                alert(`Producto con ID ${id} eliminado correctamente.`);
+
+                document.getElementById("idEliminar").value = "";
+
+            // Actualizar lista
+                obtenerProductos();
+
+            } catch (error) {
+                console.error("Error al eliminar:", error);
+                alert("Error al intentar eliminar el producto.");
+            }
+            }
+
+        // Inicializar
+            function init(){
+            obtenerProductos();
+            }
+
+            init();
+
+        </script>
+    </body>
+</html>
