@@ -72,12 +72,12 @@ app.get("/api/productos/:id", async (req,res)=>{
 //Primero traemos el producto y luego lo modicamos
 app.put("/api/productos",async(req,res)=>{
     try{
-        let {id,nombre,tipo,img_url,activo,precio} = req.body;
+        let {id, nombre, categoria, imagen, activo, precio} = req.body;
         let sql = `UPDATE productos 
-            SET nombre = ?, tipo = ?, img_url = ?, activo = ?, precio = ?
+            SET nombre = ?, categoria = ?, imagen = ?, activo = ?, precio = ?
             WHERE id = ?
         `;
-        let result = await conecction.query(sql,[nombre,tipo,img_url,activo,precio,id]);
+        let result = await connection.query(sql,[nombre,categoria,imagen,activo,precio,id]);
         console.log(result);
         res.status(200).json({
             message:"Producto actualizado correctamente"
