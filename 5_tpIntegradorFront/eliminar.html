@@ -40,92 +40,97 @@
     </header>
 
     <main>
-        <h2>Lista de productos</h2>
+        <h1>Consultar Producto por id:</h1>
 
-        <section>
-            <h3>Eliminar por ID</h3>
-            <input type="number" id="idEliminar" placeholder="ID a eliminar">
-            <button onclick="eliminarProducto()">Eliminar producto</button>
-        </section>
+        <form id="getProducts-form" class="products-form">
+            <label for="idProd">Id del Producto</label>
+            <input type="number" name="id" id="idProd" required>
+            <input type="submit" value="Consultar producto">
+        </form>
+        <hr>
 
-        <div id="totalCarrito"></div>
-        <div id="contenedor-productos"></div>
+        <div id="contenedor-productos">
+            <ul id="listado-productos"></ul>
+        </div>
     </main> 
         
         <script>
-            let contenedorProductos = document.getElementById("contenedor-productos");
-            const url = "http://localhost:3000/productos";
+        let getProducts_form = document.getElementById("getProducts-form");
+        let listado_productos = document.getElementById("listado-productos");
 
-            async function obtenerProductos (){
+        getProducts_form.addEventListener("submit", async event => {
+            event.preventDefault();
+
+            let formData = new FormData(event.target);
+            let data = Object.fromEntries(formData.entries());
+            let idProducto = data.id;
+
             try {
-                let respuesta = await fetch(url);
+                let respuesta = await fetch(`http://localhost:3000/api/productos/${idProducto}`);
+                let datos = await respuesta.json();
 
-                let data = await respuesta.json();
-                let productos = data.payload;
-
-                mostrarProductos(productos);
-
-            } catch (error) {
-                console.error(error);
-            }
-            }
-
-            function mostrarProductos(array){
-            let htmlProducto = "";
-
-            array.forEach(producto => {
-            htmlProducto += `
-                    <div class="card-producto">
-                        <img src="${producto.imagen}" alt="${producto.nombre}">
-                        <h5>${producto.nombre}</h5>
-                        <p>ID: ${producto.id}</p>
-                        <p>$${producto.precio}</p>
-                </div>
-            `;
-            });
-
-            contenedorProductos.innerHTML = htmlProducto;
-            }
-
-
-            async function eliminarProducto() {
-            const id = document.getElementById("idEliminar").value;
-
-                if (!id) {
-                    alert("Por favor ingresa un ID válido.");
-                    return;
-                }
-
-                try {
-                const respuesta = await fetch(`${url}/${id}`, {
-                    method: "DELETE",
-                });
-
-                if (!respuesta.ok) {
-                alert("No se encontró un producto con ese ID.");
-                return;
-                }
-
-                alert(`Producto con ID ${id} eliminado correctamente.`);
-
-                document.getElementById("idEliminar").value = "";
-
-            // Actualizar lista
-                obtenerProductos();
+                let producto = datos.payload[0];
+                mostrarProducto(producto);
 
             } catch (error) {
-                console.error("Error al eliminar:", error);
-                alert("Error al intentar eliminar el producto.");
+                console.log("ERROR");
+                console.log(error);
             }
-            }
+        });
+        function mostrarProducto(producto){
+            console.table(producto);
+            let htmlProducto = `
+                <li class="li-listados">
+                    <h4>${producto.nombre}</h4>
+                    <p>${producto.id}</p>
+                        <p><strong>Precio:</strong> $${producto.precio}</p>
+                        <p><strong>Stock:</strong> ${producto.tipo} unidades</p>
+                </li>
+                <li class="li-botonera">
+                    <input type="button" id="deleteProduct_button" value="eliminar">
+                </li>
+                `;
+                
 
-        // Inicializar
-            function init(){
-            obtenerProductos();
-            }
+            listado_productos.innerHTML = htmlProducto;
+            // let deleteProduct_button =  document.getElementById("deleteProduct_button");
+            // deleteProduct_button.addEventListener("click",event=>{
+            //     event.stopPropagation();
+            //     let confirmacion = confirm("Desear eliminar producto");
+            //     if(!confirmacion){
+            //         alert("Eliminacion cancelada");
+            //     }
+            //     else{
+            //         eliminarProducto(producto.id)
+            //     }
+            // })
 
-            init();
-
+        }
+        // async function eliminarProducto(id){
+        //     try{
+        //         let response = await fetch(`http://localhost:3000/api/productos/${id}`,{
+        //             method:"DELETE",
+        //         });
+        //         console.log(response)
+        //         let result = await response.json();
+        //         if(response.ok){
+        //             alert(result.message);
+        //             console.log(result.message);
+        //             listado_productos.innerHTML = "";
+        //         }
+        //         else{
+        //             alert("No se pudo eliminar un producto");
+        //             console.error(result.message)
+        //         }
+        //     }
+        //     //errores de conexion real
+        //     catch(error){
+        //         console.error("Error en la solicitud DELETE:", error);
+        //         alert("Ocurrio un error");
+        //     }
+        // }
+    
+    
         </script>
     </body>
 </html>
