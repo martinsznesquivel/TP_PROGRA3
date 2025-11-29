@@ -13,10 +13,12 @@
     <header>
         <nav class="nav-principal">
             <span class="titulo">Musical shop</span>
+
             <div>
                 <span id="nombreAlumno"></span>
                 <input id="barraBusqueda" type="text" placeholder="Buscar...">
             </div>
+
             <span id="contadorCarrito">Carrito: 0 productos</span>
         </nav>
 
@@ -41,11 +43,12 @@
         </form>
 
         <hr>
+
         <div id="contenedor-productos">
             <ul id="listado-productos"></ul>
         </div>
-        <div id="contenedor-formulario"></div>
 
+        <div id="contenedor-formulario"></div>
     </main>
 
     <script>
@@ -53,6 +56,7 @@
         let listado_productos = document.getElementById("listado-productos");
         let contenedor_formulario = document.getElementById("contenedor-formulario");
 
+        // Consultar producto por ID
         getProducts_form.addEventListener("submit", async event => {
             event.preventDefault();
 
@@ -73,93 +77,107 @@
             }
         });
 
+        // Mostrar producto consultado
         function mostrarProducto(producto) {
             console.table(producto);
 
             let htmlProducto = `
                 <li class="li-listados">
                     <h4>${producto.nombre}</h4>
-                    <p>${producto.id}</p>
-                        <p><strong>Precio:</strong> $${producto.precio}</p>
-                        <p><strong>Tipo:</strong> ${producto.categoria} unidades</p>
+                    <p><strong>ID:</strong> ${producto.id}</p>
+                    <p><strong>Precio:</strong> $${producto.precio}</p>
+                    <p><strong>Tipo:</strong> ${producto.categoria}</p>
                 </li>
+
                 <li class="li-botonera">
                     <input type="button" id="upadeteProduct_button" value="Actualizar">
                 </li>
-                `;
+            `;
 
             listado_productos.innerHTML = htmlProducto;
-            let upadeteProduct_button = document.getElementById("upadeteProduct_button");
-            upadeteProduct_button.addEventListener("click",event=>{
-                crearFormularioPut(event,producto);
-            })
+
+            let updateButton = document.getElementById("upadeteProduct_button");
+            updateButton.addEventListener("click", event => {
+                crearFormularioPut(event, producto);
+            });
         }
-        function crearFormularioPut(event,producto){
+
+        // Crear formulario PUT
+        function crearFormularioPut(event, producto) {
             event.stopPropagation();
-            console.table(producto)
+            console.table(producto);
 
-            //luego al apretar el boton se va a crer un campo con los datos que quiero actualizar
-            //ahora agrego las variables para que salgan los datos que ya tenia el producto
-            let formularioPutHtml =`<form id="updateProducts-form" class="products-form">
-                <input type="hidden" name="id" value="${producto.id}">
-                <label for="nameProd">Nombre</label>
-                <input type="text" name="nombre" id="nameProd" value="${producto.nombre}">
-                <label for="imageProd">Imagen</label>
-                <input type="text" name="img_url" id="imageProd" value="${producto.imagen}">
+            let formularioPutHtml = `
+                <form id="updateProducts-form" class="products-form">
 
-                <label for="categoryprod">Imagen</label>
-                <select  name="tipo" id="categoryprod" value="${producto.tipo}"  required>
-                    <option value="cd">cd</option>
-                    <option value="cassete">cassete</option>
-                    <option value="vinilo">vinilo</option>
-                </select>
-                <label for="priceProd">Precio</label>
-                <input type="number" name="precio" id="priceProd" value="${producto.precio}" required>
-                <br>
-                <input type="hidden" name="activo" value="${producto.activo}">
-                <input type="submit" value="Modificar Producto">
-            </form> `
+                    <input type="hidden" name="id" value="${producto.id}">
+
+                    <label for="nameProd">Nombre</label>
+                    <input type="text" name="nombre" id="nameProd" value="${producto.nombre}">
+
+                    <label for="imageProd">Imagen</label>
+                    <input type="text" name="imagen" id="imageProd" value="${producto.imagen}">
+
+                    <label for="categoryprod">Categoría</label>
+                    <select name="categoria" id="categoryprod" required>
+                        <option value="cd" ${producto.categoria === "cd" ? "selected" : ""}>cd</option>
+                        <option value="cassete" ${producto.categoria === "cassete" ? "selected" : ""}>cassete</option>
+                        <option value="vinilo" ${producto.categoria === "vinilo" ? "selected" : ""}>vinilo</option>
+                    </select>
+
+                    <label for="priceProd">Precio</label>
+                    <input type="number" name="precio" id="priceProd" value="${producto.precio}" required>
+
+                    <input type="hidden" name="activo" value="${producto.activo}">
+
+                    <br>
+                    <input type="submit" value="Modificar Producto">
+                </form>
+            `;
+
             contenedor_formulario.innerHTML = formularioPutHtml;
-            let updateProducts_form = document.getElementById("updateProducts-form")
-            updateProducts_form.addEventListener("submit",event=>{
-                actualizarProducto(event);
-            })
-        }
-        async function actualizarProducto(event){
-            event.preventDefault();
-            console.log(event)//me devuelve el formulario del eveneto que se activo
-            let url = `http://localhost:3000/api/productos`;
 
+            let updateProducts_form = document.getElementById("updateProducts-form");
+            updateProducts_form.addEventListener("submit", event => actualizarProducto(event));
+        }
+
+        // Enviar PUT al servidor
+        async function actualizarProducto(event) {
+            event.preventDefault();
+
+            let url = `http://localhost:3000/api/productos`;
             let formdata = new FormData(event.target);
             let data = Object.fromEntries(formdata.entries());
 
-            try{
-                //cuando no es un metodo get se le pasa un segundo parametro
-                let response = await fetch(url,{
-                    method:"PUT",
-                    headers:{
-                        "content-Type":"application/json"
+            try {
+                let response = await fetch(url, {
+                    method: "PUT",
+                    headers: {
+                        "content-Type": "application/json"
                     },
                     body: JSON.stringify(data)
-                })
+                });
+
                 let result = await response.json();
-                
-                if(response.ok){
+
+                if (response.ok) {
                     console.log(result.message);
                     alert(result.message);
-                    //Vaciamos los contenedores
-                    listado_productos.innerHTML="";
-                    contenedor_formulario.innerHTML="";
-                }else{
-                    console.error("Error:",error.message)
-                    alert(error.message);
+
+                    // Limpiar pantalla
+                    listado_productos.innerHTML = "";
+                    contenedor_formulario.innerHTML = "";
+
+                } else {
+                    console.error("Error:", result.message);
+                    alert(result.message);
                 }
-            }catch(error){
-                console.log("Error al enviar los datos:",error)
-                alert("Error al procesar la solicitud")
+
+            } catch (error) {
+                console.log("Error al enviar los datos:", error);
+                alert("Error al procesar la solicitud");
             }
         }
-
     </script>
 
 </body>
