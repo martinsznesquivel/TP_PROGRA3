@@ -11,6 +11,10 @@ const PORT = environments.port;
 
 import connection from "./src/api/database/db.js";
 
+app.listen(PORT, () => {
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+});
+
 // Endpoints
 app.get("/", (req, res) => {
   res.send("Hola mundo desde Express.js");
