@@ -93,42 +93,42 @@
                 
 
             listado_productos.innerHTML = htmlProducto;
-            // let deleteProduct_button =  document.getElementById("deleteProduct_button");
-            // deleteProduct_button.addEventListener("click",event=>{
-            //     event.stopPropagation();
-            //     let confirmacion = confirm("Desear eliminar producto");
-            //     if(!confirmacion){
-            //         alert("Eliminacion cancelada");
-            //     }
-            //     else{
-            //         eliminarProducto(producto.id)
-            //     }
-            // })
+             let deleteProduct_button =  document.getElementById("deleteProduct_button");
+             deleteProduct_button.addEventListener("click",event=>{
+                 event.stopPropagation();
+                 let confirmacion = confirm("Desear eliminar producto");
+                 if(!confirmacion){
+                     alert("Eliminacion cancelada");
+                 }
+                 else{
+                     eliminarProducto(producto.id)
+                 }
+             })
 
         }
-        // async function eliminarProducto(id){
-        //     try{
-        //         let response = await fetch(`http://localhost:3000/api/productos/${id}`,{
-        //             method:"DELETE",
-        //         });
-        //         console.log(response)
-        //         let result = await response.json();
-        //         if(response.ok){
-        //             alert(result.message);
-        //             console.log(result.message);
-        //             listado_productos.innerHTML = "";
-        //         }
-        //         else{
-        //             alert("No se pudo eliminar un producto");
-        //             console.error(result.message)
-        //         }
-        //     }
-        //     //errores de conexion real
-        //     catch(error){
-        //         console.error("Error en la solicitud DELETE:", error);
-        //         alert("Ocurrio un error");
-        //     }
-        // }
+         async function eliminarProducto(id){
+             try{
+                 let response = await fetch(`http://localhost:3000/api/productos/${id}`,{
+                     method:"DELETE",
+                 });
+                 console.log(response)
+                 let result = await response.json();
+                 if(response.ok){
+                     alert(result.message);
+                     console.log(result.message);
+                     listado_productos.innerHTML = "";
+                 }
+                 else{
+                     alert("No se pudo eliminar un producto");
+                     console.error(result.message)
+                 }
+             }
+             //errores de conexion real
+             catch(error){
+                 console.error("Error en la solicitud DELETE:", error);
+                 alert("Ocurrio un error");
+            }
+         }
     
     
         </script>
