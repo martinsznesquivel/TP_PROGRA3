@@ -1,15 +1,17 @@
 import express from "express";
+import environments from "./src/api/config/environments.js";
+import connection from "./src/api/database/db.js";
+import cors from "cors"; 
 const app = express();
 
-import cors from "cors"; // Importamos cors para poder usar sus metodos y permitir solicitudes de otras aplicaciones hacia nuestra api
-app.use(cors()); // Middleware basico que permite todas las solicitudes
+
+app.use(cors()); 
 
 app.use(express.json()); 
 
-import environments from "./src/api/config/environments.js";
 const PORT = environments.port;
 
-import connection from "./src/api/database/db.js";
+
 
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
@@ -66,6 +68,28 @@ app.get("/api/productos/:id", async (req,res)=>{
     }
 })
 
+//put actualizar productos
+//Primero traemos el producto y luego lo modicamos
+app.put("/api/productos",async(req,res)=>{
+    try{
+        let {id,nombre,tipo,img_url,activo,precio} = req.body;
+        let sql = `UPDATE productos 
+            SET nombre = ?, tipo = ?, img_url = ?, activo = ?, precio = ?
+            WHERE id = ?
+        `;
+        let result = await conecction.query(sql,[nombre,tipo,img_url,activo,precio,id]);
+        console.log(result);
+        res.status(200).json({
+            message:"Producto actualizado correctamente"
+        });
+    }catch(error){
+        console.log("Error al actualizar producto:",error);
+        res.status(500).json({
+            message:`Error intenro del servidor: ${error}`
+        })
+    }
+})
+
 
 //Eliminar producto por id
 app.delete("/api/productos/:id", async (req, res) => {
@@ -90,7 +114,6 @@ app.delete("/api/productos/:id", async (req, res) => {
 
 
 // Crear nuevos productos
-
 app.post("/api/productos", async (req, res) => {
   try {
     let { imagen, nombre, precio, categoria } = req.body;
