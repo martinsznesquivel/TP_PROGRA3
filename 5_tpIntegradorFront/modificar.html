@@ -23,18 +23,18 @@
         </nav>
 
         <nav class="nav-secundario">
-            <ul>
-                <a href="index.html"><li>Ver</li></a>
-                <a href="consultar.html"><li>Consultar ID</li></a>
-                <a href="crear.html"><li>Crear</li></a>
-                <a href="modificar.html"><li>Modificar</li></a>
-                <a href="eliminar.html"><li>Eliminar</li></a>
-            </ul>
+          <ul class="nav-links">
+            <li><a href="index.html">Ver</a></li>
+            <li><a href="consultar.html">Consultar ID</a></li>
+            <li><a href="crear.html">Crear</a></li>
+            <li><a href="modificar.html">Modificar</a></li>
+            <li><a href="eliminar.html">Eliminar</a></li>
+          </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Consultar Producto por id:</h1>
+        <h1>Modificar Producto por id:</h1>
 
         <form id="getProducts-form" class="products-form">
             <label for="idProd">Id del Producto</label>
@@ -79,24 +79,29 @@
 
         // Mostrar producto consultado
         function mostrarProducto(producto) {
+
+            let imagen = producto.imagen;
+
             console.table(producto);
 
             let htmlProducto = `
-                <li class="li-listados">
-                    <h4>${producto.nombre}</h4>
-                    <p><strong>ID:</strong> ${producto.id}</p>
-                    <p><strong>Precio:</strong> $${producto.precio}</p>
-                    <p><strong>Tipo:</strong> ${producto.categoria}</p>
-                </li>
+                    <li class="producto-card">
+                        <img src="${imagen}" alt="Imagen de ${producto.nombre}" class="product-img">
+                    
+                        <div class="detalles-producto">
+                            <h4>${producto.nombre}</h4>
+                            <p>ID: ${producto.id}</p>
+                            <p><strong>Precio:</strong> $${producto.precio}</p>
+                            <p><strong>Categoria:</strong> ${producto.categoria}</p>
+                        </div>
 
-                <li class="li-botonera">
-                    <input type="button" id="upadeteProduct_button" value="Actualizar">
-                </li>
-            `;
+                        <button id="updateProduct_button" class="update_button">Modificar Producto</button>
+                    </li>
+                `;
 
             listado_productos.innerHTML = htmlProducto;
 
-            let updateButton = document.getElementById("upadeteProduct_button");
+            let updateButton = document.getElementById("updateProduct_button");
             updateButton.addEventListener("click", event => {
                 crearFormularioPut(event, producto);
             });

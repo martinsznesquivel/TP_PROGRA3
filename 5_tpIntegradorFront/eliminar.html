@@ -3,50 +3,47 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
         <link rel="stylesheet" href="css/styles.css" />
+        
         <script src="js/main.js" defer></script>
-        <title>Simulacro</title>
+        <title>Eliminar producto</title>
     </head>
 
     <body>
+
     <header>
         <nav class="nav-principal">
             <span class="titulo">Musical shop</span>
+
             <div>
                 <span id="nombreAlumno"></span>
                 <input id="barraBusqueda" type="text", placeholder="Buscar...">
             </div>
+
             <span id="contadorCarrito">Carrito: 0 productos</span>
         </nav>
+
         <nav class="nav-secundario">
-        <ul>
-            <a href="index.html">
-                <li>Ver</li>
-            </a>
-            <a href="consultar.html">
-                <li>Consultar ID</li>
-            </a>
-            <a href="crear.html">
-                <li>Crear</li>
-            </a>
-            <a href="modificar.html">
-                <li>Modificar</li>
-            </a>
-            <a href="eliminar.html">
-                <li>Eliminar</li>
-            </a>
-        </ul>
-    </nav>
+          <ul class="nav-links">
+            <li><a href="index.html">Ver</a></li>
+            <li><a href="consultar.html">Consultar ID</a></li>
+            <li><a href="crear.html">Crear</a></li>
+            <li><a href="modificar.html">Modificar</a></li>
+            <li><a href="eliminar.html">Eliminar</a></li>
+          </ul>
+        </nav>
     </header>
 
     <main>
-        <h1>Consultar Producto por id:</h1>
+        <h1>Eliminar Producto por id:</h1>
 
         <form id="getProducts-form" class="products-form">
             <label for="idProd">Id del Producto</label>
             <input type="number" name="id" id="idProd" required>
             <input type="submit" value="Consultar producto">
         </form>
+        
         <hr>
 
         <div id="contenedor-productos">
@@ -55,8 +52,8 @@
     </main> 
         
         <script>
-        let getProducts_form = document.getElementById("getProducts-form");
-        let listado_productos = document.getElementById("listado-productos");
+        const getProducts_form = document.getElementById("getProducts-form");
+        const listado_productos = document.getElementById("listado-productos");
 
         getProducts_form.addEventListener("submit", async event => {
             event.preventDefault();
@@ -77,26 +74,36 @@
                 console.log(error);
             }
         });
+
         function mostrarProducto(producto){
+
+            let imagen = producto.imagen;
+
             console.table(producto);
+
             let htmlProducto = `
-                <li class="li-listados">
-                    <h4>${producto.nombre}</h4>
-                    <p>${producto.id}</p>
-                        <p><strong>Precio:</strong> $${producto.precio}</p>
-                        <p><strong>Stock:</strong> ${producto.tipo} unidades</p>
-                </li>
-                <li class="li-botonera">
-                    <input type="button" id="deleteProduct_button" value="eliminar">
-                </li>
+                    <li class="producto-card">
+                        <img src="${imagen}" alt="Imagen de ${producto.nombre}" class="product-img">
+                    
+                        <div class="detalles-producto">
+                            <h4>${producto.nombre}</h4>
+                            <p>ID: ${producto.id}</p>
+                            <p><strong>Precio:</strong> $${producto.precio}</p>
+                            <p><strong>Categoria:</strong> ${producto.categoria}</p>
+                        </div>
+
+                        <button id="deleteProduct_button" class="delete-button">Eliminar Producto</button>
+                    </li>
                 `;
                 
-
             listado_productos.innerHTML = htmlProducto;
+
              let deleteProduct_button =  document.getElementById("deleteProduct_button");
-             deleteProduct_button.addEventListener("click",event=>{
+
+             deleteProduct_button.addEventListener("click", event => {
                  event.stopPropagation();
-                 let confirmacion = confirm("Desear eliminar producto");
+                 let confirmacion = confirm("¿Desea eliminar este producto?");
+
                  if(!confirmacion){
                      alert("Eliminacion cancelada");
                  }
@@ -107,12 +114,15 @@
 
         }
          async function eliminarProducto(id){
-             try{
+             try {
                  let response = await fetch(`http://localhost:3000/api/productos/${id}`,{
                      method:"DELETE",
                  });
+
                  console.log(response)
+
                  let result = await response.json();
+
                  if(response.ok){
                      alert(result.message);
                      console.log(result.message);

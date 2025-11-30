@@ -1,92 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
     <script src="js/main.js" defer></script>
     <title>Simulacro</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <nav class="nav-principal">
-            <span class="titulo">Musical shop</span>
-            <div>
-                <span id="nombreAlumno"></span>
-                <input id="barraBusqueda" type="text" placeholder="Buscar...">
-            </div>
-            <span id="contadorCarrito">Carrito: 0 productos</span>
-        </nav>
+      <nav class="nav-principal">
+        <span class="titulo">Musical shop</span>
+        <div>
+          <span id="nombreAlumno"></span>
+          <input id="barraBusqueda" type="text" placeholder="Buscar..." />
+        </div>
+        <span id="contadorCarrito">Carrito: 0 productos</span>
+      </nav>
 
         <nav class="nav-secundario">
-            <ul>
-                <a href="index.html"><li>Ver</li></a>
-                <a href="consultar.html"><li>Consultar ID</li></a>
-                <a href="crear.html"><li>Crear</li></a>
-                <a href="modificar.html"><li>Modificar</li></a>
-                <a href="eliminar.html"><li>Eliminar</li></a>
-            </ul>
+          <ul class="nav-links">
+            <li><a href="index.html">Ver</a></li>
+            <li><a href="consultar.html">Consultar ID</a></li>
+            <li><a href="crear.html">Crear</a></li>
+            <li><a href="modificar.html">Modificar</a></li>
+            <li><a href="eliminar.html">Eliminar</a></li>
+          </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Consultar Producto por id:</h1>
+      <h1>Consultar Producto por id:</h1>
 
-        <form id="getProducts-form" class="products-form">
-            <label for="idProd">Id del Producto</label>
-            <input type="number" name="id" id="idProd" required>
-            <input type="submit" value="Consultar producto">
-        </form>
+      <form id="getProducts-form" class="products-form">
+        <label for="idProd">Id del Producto</label>
+        <input type="number" name="id" id="idProd" required />
+        <input type="submit" value="Consultar producto" />
+      </form>
 
-        <hr>
+      <hr />
 
-        <div id="contenedor-productos">
-            <ul id="listado-productos"></ul>
-        </div>
-
+      <div id="contenedor-productos">
+        <ul id="listado-productos"></ul>
+      </div>
     </main>
 
     <script>
-        let getProducts_form = document.getElementById("getProducts-form");
-        let listado_productos = document.getElementById("listado-productos");
+      let getProducts_form = document.getElementById("getProducts-form");
+      let listado_productos = document.getElementById("listado-productos");
 
-        getProducts_form.addEventListener("submit", async event => {
-            event.preventDefault();
+      getProducts_form.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-            let formData = new FormData(event.target);
-            let data = Object.fromEntries(formData.entries());
-            let idProducto = data.id;
+        let formData = new FormData(event.target);
+        let data = Object.fromEntries(formData.entries());
+        let idProducto = data.id;
 
-            try {
-                let respuesta = await fetch(`http://localhost:3000/api/productos/${idProducto}`);
-                let datos = await respuesta.json();
+        try {
+          let respuesta = await fetch(
+            `http://localhost:3000/api/productos/${idProducto}`
+          );
+          let datos = await respuesta.json();
 
-                let producto = datos.payload[0];
-                mostrarProducto(producto);
+          let producto = datos.payload[0];
+          mostrarProducto(producto);
+        } catch (error) {
+          console.log("ERROR");
+          console.log(error);
+        }
+      });
 
-            } catch (error) {
-                console.log("ERROR");
-                console.log(error);
-            }
-        });
+      function mostrarProducto(producto) {
 
-        function mostrarProducto(producto) {
+            let imagen = producto.imagen;
+
             console.table(producto);
 
             let htmlProducto = `
-                <li class="li-listados">
-                    <h4>${producto.nombre}</h4>
-                    <p>ID: ${producto.id}</p>
-                    <p><strong>Precio:</strong> $${producto.precio}</p>
-                    <p><strong>Tipo:</strong> ${producto.tipo}</p>
-                </li>
-            `;
+                    <li class="producto-card">
+                        <img src="${imagen}" alt="Imagen de ${producto.nombre}" class="product-img">
+                    
+                        <div class="detalles-producto">
+                            <h4>${producto.nombre}</h4>
+                            <p>ID: ${producto.id}</p>
+                            <p><strong>Precio:</strong> $${producto.precio}</p>
+                            <p><strong>Categoria:</strong> ${producto.categoria}</p>
+                        </div>
+                    </li>
+                `;
 
-            listado_productos.innerHTML = htmlProducto;
-        }
+        listado_productos.innerHTML = htmlProducto;
+      }
     </script>
-
-</body>
+  </body>
 </html>

@@ -7,55 +7,50 @@
     <script src="js/main.js" defer></script>
     <title>Simulacro</title>
   </head>
+  
   <body>
 
     <header>
       
         <nav class="nav-principal">
             <span class="titulo">Musical shop</span>
+
             <div>
                 <span id="nombreAlumno"></span>
                 <input id="barraBusqueda" type="text", placeholder="Buscar...">
             </div>
+
             <span id="contadorCarrito">Carrito: 0 productos</span>
         </nav>
 
         <nav class="nav-secundario">
-          <ul>
-            <a href="index.html">
-              <li>Ver</li>
-            </a>
-            <a href="consultar.html">
-              <li>Consultar ID</li>
-            </a>
-            <a href="crear.html">
-              <li>Crear</li>
-            </a>
-            <a href="modificar.html">
-              <li>Modificar</li>
-            </a>
-            <a href="eliminar.html">
-              <li>Eliminar</li>
-            </a>
+          <ul class="nav-links">
+            <li><a href="index.html">Ver</a></li>
+            <li><a href="consultar.html">Consultar ID</a></li>
+            <li><a href="crear.html">Crear</a></li>
+            <li><a href="modificar.html">Modificar</a></li>
+            <li><a href="eliminar.html">Eliminar</a></li>
           </ul>
         </nav>
+        
     </header>
 
     <main>
         <h2>Lista de productos</h2>
+
         <div class="botones-orden">
             <button onclick="ordenarPorNombre()">Ordenar por nombre</button>
             <button onclick="ordenarPorPrecio()">Ordenar por precio</button>
         </div>
-        <aside id="contenedorCarrito">
+
         <div id="totalCarrito"></div>
-        </aside>
+
         <div id="contenedor-productos"></div>
     </main> 
         
     <script>
       // Seleccionamos el elemento al que le vamos a inyectar el html
-      let contenedorProductos = document.getElementById("contenedor-productos");
+      const contenedorProductos = document.getElementById("contenedor-productos");
       const url = "http://localhost:3000/api/productos" // guardamos en la variable url nuestro endpoint
 
       async function obtenerProductos (){
