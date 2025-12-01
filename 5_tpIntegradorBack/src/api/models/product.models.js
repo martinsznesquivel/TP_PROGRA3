@@ -49,7 +49,6 @@ const updateProducts = (nombre, categoria, imagen, activo, precio, id) => {
 
 const deleteProducts = (id) => {
         let sql = `DELETE FROM productos WHERE id = ?`;
-
         let sql2 = `UPDATE products set active = 0 WHERE id = ?`;
 
         return connection.query(sql, [id]);
