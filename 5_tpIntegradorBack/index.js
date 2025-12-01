@@ -87,15 +87,33 @@ app.get("/api/productos/:id", validateId, async (req,res)=>{
 app.put("/api/productos",async(req,res)=>{
     try{
         let {id, nombre, categoria, imagen, activo, precio} = req.body;
-        let sql = `UPDATE productos 
+
+        if (!id ||!nombre || !categoria || !imagen || !activo ||  !precio){
+          return res.status(400).json({
+            message : "Faltan campos requeridos"
+          });
+        }
+
+        let sql = `
+            UPDATE productos 
             SET nombre = ?, categoria = ?, imagen = ?, activo = ?, precio = ?
             WHERE id = ?
         `;
-        let result = await connection.query(sql,[nombre,categoria,imagen,activo,precio,id]);
+
+        let [result] = await connection.query(sql,[nombre,categoria,imagen,activo,precio,id]);
+
         console.log(result);
+
+        if (result.affectedRows === 0) {
+          return res.status(400).json({
+            message : "No se actualizó el producto"
+          });
+        }
+
         res.status(200).json({
             message:"Producto actualizado correctamente"
         });
+
     }catch(error){
         console.log("Error al actualizar producto:",error);
         res.status(500).json({
@@ -114,7 +132,13 @@ app.delete("/api/productos/:id", validateId, async (req, res) => {
 
         let sql2 = `UPDATE products set active = 0 WHERE id = ?`;
         
-        await connection.query(sql, [id]);
+        let [result] = await connection.query(sql, [id]);
+
+        if (result.affectedRows === 0) {
+          return res.status(400).json({
+            message : `No se eliminó el producto con id ${id}`
+          });
+        }
 
         res.status(200).json({
             message: `Producto con id ${id} eliminado correctamente`
@@ -122,6 +146,7 @@ app.delete("/api/productos/:id", validateId, async (req, res) => {
 
     } catch (error) {
         console.error("Error al eliminar un producto por su id:", error);
+
         res.status(500).json({
             message: `Error al eliminar producto con id: ${req.params.id}`,
             error: error.message
