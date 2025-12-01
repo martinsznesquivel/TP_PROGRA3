@@ -2,10 +2,13 @@ import express from "express";
 import environments from "./src/api/config/environments.js";
 import connection from "./src/api/database/db.js";
 import cors from "cors"; 
+import { loggerUrl, validateId } from "./src/api/middlewares/middlewares.js";
 const app = express();
 
 
 app.use(cors()); 
+
+app.use(loggerUrl)
 
 app.use(express.json()); 
 
@@ -47,12 +50,23 @@ app.get("/api/productos", async (req, res) => {
 });
 
 //Consultar por id Get product by id
-app.get("/api/productos/:id", async (req,res)=>{
+app.get("/api/productos/:id", validateId, async (req,res)=>{
     try{
         //extraemos el valor id de la url, de toda la req solo usamos el id
         let {id} = req.params;
-        let sql  = "SELECT * FROM productos WHERE productos.id = ?";
+
+        let sql  = "SELECT * FROM productos WHERE productos.id = ? LIMIT 1";
+
         const [rows] = await  connection.query(sql,[id]);
+
+        if (rows.length === 0) {
+          console.log(`Error, no existe producto con el id ${id}`);
+          
+          return res.status(404).json({
+            message : `No se encontró producto con id ${id}`
+          });
+        }
+
         res.status(200).json({
             payload:rows
         });
@@ -92,11 +106,14 @@ app.put("/api/productos",async(req,res)=>{
 
 
 //Eliminar producto por id
-app.delete("/api/productos/:id", async (req, res) => {
+app.delete("/api/productos/:id", validateId, async (req, res) => {
     try {
         let { id } = req.params;
 
         let sql = `DELETE FROM productos WHERE id = ?`;
+
+        let sql2 = `UPDATE products set active = 0 WHERE id = ?`;
+        
         await connection.query(sql, [id]);
 
         res.status(200).json({
