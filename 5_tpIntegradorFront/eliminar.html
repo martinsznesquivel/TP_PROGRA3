@@ -18,7 +18,7 @@
 
             <div>
                 <span id="nombreAlumno"></span>
-                <input id="barraBusqueda" type="text", placeholder="Buscar...">
+                <input id="barraBusqueda" type="text" placeholder="Buscar...">
             </div>
 
             <span id="contadorCarrito">Carrito: 0 productos</span>
@@ -64,10 +64,20 @@
 
             try {
                 let respuesta = await fetch(`http://localhost:3000/api/productos/${idProducto}`);
-                let datos = await respuesta.json();
 
-                let producto = datos.payload[0];
-                mostrarProducto(producto);
+                let result = await respuesta.json();
+
+                if (respuesta.ok){
+
+                    let producto = result.payload[0];
+
+                    mostrarProducto(producto);
+
+                } else {
+                    console.error(result.message);
+
+                    mostrarError(result.message);
+                }
 
             } catch (error) {
                 console.log("ERROR");
@@ -138,6 +148,17 @@
                  console.error("Error en la solicitud DELETE:", error);
                  alert("Ocurrio un error");
             }
+         }
+
+        function mostrarError(message){
+            listado_productos.innerHTML = `
+                <li class="message-error">
+                    <p>
+                    <strong>Error:</strong>
+                    <span>${message}</span>
+                    </p>
+                </li>
+                `;
          }
     
     

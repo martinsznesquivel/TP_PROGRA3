@@ -66,10 +66,20 @@
 
             try {
                 let respuesta = await fetch(`http://localhost:3000/api/productos/${idProducto}`);
-                let datos = await respuesta.json();
+                let result = await respuesta.json();
 
-                let producto = datos.payload[0];
+            if (respuesta.ok){
+
+                let producto = result.payload[0];
+
                 mostrarProducto(producto);
+
+            } else {
+                console.error(result.message);
+
+                mostrarError(result.message);
+
+            }
 
             } catch (error) {
                 console.log("ERROR");
@@ -183,6 +193,17 @@
                 alert("Error al procesar la solicitud");
             }
         }
+
+      function mostrarError(message){
+          listado_productos.innerHTML = `
+              <li class="message-error">
+                <p>
+                  <strong>Error:</strong>
+                  <span>${message}</span>
+                </p>
+              </li>
+            `;
+         }
     </script>
 
 </body>
