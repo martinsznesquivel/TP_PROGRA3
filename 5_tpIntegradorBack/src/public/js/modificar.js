@@ -85,9 +85,9 @@ function crearFormularioPut(event, producto) {
                         <option value="cd" ${
                           producto.categoria === "cd" ? "selected" : ""
                         }>cd</option>
-                        <option value="cassete" ${
-                          producto.categoria === "cassete" ? "selected" : ""
-                        }>cassete</option>
+                        <option value="cassette" ${
+                          producto.categoria === "cassette" ? "selected" : ""
+                        }>cassette</option>
                         <option value="vinilo" ${
                           producto.categoria === "vinilo" ? "selected" : ""
                         }>vinilo</option>
@@ -127,7 +127,7 @@ async function actualizarProducto(event) {
     let response = await fetch(url, {
       method: "PUT",
       headers: {
-        "content-Type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });

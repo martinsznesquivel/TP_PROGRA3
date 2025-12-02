@@ -42,7 +42,7 @@ const updateProducts = (nombre, categoria, imagen, activo, precio, id) => {
         WHERE id = ?
     `;
 
-    return connection.query(sql, [nombre, categoria, imagen, activo, precio, id,]);
+    return connection.query(sql, [nombre, categoria, imagen, activo, precio, id]);
 }
 
 // ELiminar productos

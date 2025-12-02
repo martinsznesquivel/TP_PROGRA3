@@ -99,12 +99,6 @@ export const modifyProduct = async (req, res) => {
       });
     }
 
-    let sql = `
-            UPDATE productos 
-            SET nombre = ?, categoria = ?, imagen = ?, activo = ?, precio = ?
-            WHERE id = ?
-        `;
-
     let [result] = await ProductModel.updateProducts(nombre, categoria, imagen, activo, precio, id);
 
     console.log(result);
