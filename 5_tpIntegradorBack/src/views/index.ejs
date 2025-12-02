@@ -4,13 +4,6 @@
     <main>
         <h1><%= about %> </h1>
         <hr>
-        <div class="botones-orden">
-            <button onclick="ordenarPorNombre()">Ordenar por nombre</button>
-            <button onclick="ordenarPorPrecio()">Ordenar por precio</button>
-        </div>
-        
-        <div id="totalCarrito"></div>
-        
         <div id="contenedor-productos">
         <!-- Se itera el array de productos que pasamos desde el endpoint -->
         <% productos.forEach(producto => { %>

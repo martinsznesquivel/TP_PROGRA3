@@ -3,67 +3,98 @@
    ========================================================= */
 * {
     list-style: none;
-}
-
-   body {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    flex-direction: column;
+}
 
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background:
         linear-gradient(
-            rgba(255, 255, 255, 0.90),
-            rgba(255, 255, 255, 0.90)
+            rgba(255, 255, 255, 0.92),
+            rgba(255, 255, 255, 0.92)
         ),
         url("https://e1.pxfuel.com/desktop-wallpaper/32/302/desktop-wallpaper-musical-instrument-backgrounds-vector-background-on-musical-instruments.jpg");
-
     background-size: cover;
     background-attachment: fixed;
+    min-height: 100vh;
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 40px 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #553d2a;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
 }
 
 h2 {
-    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+hr {
+    width: 100%;
+    max-width: 1100px;
+    border: none;
+    border-top: 2px solid #e8e8e8;
+    margin: 30px 0;
 }
 
 
 /* =========================================================
    NAV PRINCIPAL
    ========================================================= */
-nav {
+nav,
+.nav-principal {
+    background: linear-gradient(135deg, #553d2a 0%, #6b4d35 100%);
+    height: 75px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #553d2a;
+    padding: 0 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     color: white;
-    height: 55px;
-    padding: 0 20px;
-}
-
-nav.nav-secundario {
-    display: block;
 }
 
 .titulo {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 700;
 }
 
-#barraBusqueda {
-    padding: 8px;
-    width: 220px;
-    border: none;
-    border-radius: 4px;
+.nav-principal img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+.nav-principal > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.nav-principal #nombreAlumno1 {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
 
 /* =========================================================
    NAV SECUNDARIO
@@ -73,162 +104,128 @@ nav.nav-secundario {
     width: 100%;
     padding: 0;
     margin: 0;
-    height: 45px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-secundario .nav-links {
     margin: 0;
     padding: 0;
-
     display: flex;
     justify-content: center; 
     align-items: center;
-    gap: 30px;
+    gap: 35px;
 }
 
 .nav-secundario .nav-links li a {
     color: white;
     text-decoration: none;
-    padding: 8px 12px;
+    padding: 10px 18px;
     display: block;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 20px;
 }
 
 .nav-secundario .nav-links li a:hover {
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
 }
 
 
 /* =========================================================
-   HOME – LISTADO DE PRODUCTOS
+   FORMULARIO DE LOGOUT
+   ========================================================= */
+#logout {
+    background-color: #302217;
+    padding: 12px 40px;
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#logout input[type="submit"] {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+#logout input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(220, 53, 69, 0.4);
+}
+
+
+/* =========================================================
+    LISTADO DE PRODUCTOS
    ========================================================= */
 #contenedor-productos {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1300px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 28px;
+    margin-bottom: 50px;
 }
 
 .card-producto {
-    background-color: white;
-    width: 180px;
-    height: 220px;
-    border: 2px solid #d0d0d0;
-    border-radius: 10px;
-    padding: 15px 10px;
-    text-align: center;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
-
+    background: white;
+    width: 220px;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .card-producto:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(85, 61, 42, 0.15);
+    border-color: #553d2a;
 }
 
 .card-producto img {
-    width: 90px;
-    height: 90px;
+    width: 140px;
+    height: 140px;
     object-fit: cover;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-producto h5 {
-    margin: 5px 0;
-    font-size: 16px;
+    font-size: 18px;
+    margin-bottom: 8px;
+    text-align: center;
+    color: #333;
+    font-weight: 700;
 }
 
 .card-producto p {
-    margin: 2px 0;
     font-size: 14px;
+    margin: 5px 0;
+    color: #666;
 }
 
-
-/* =========================================================
-   BOTONES DE ORDENAMIENTO
-   ========================================================= */
-.botones-orden {
-    display: flex;
-    gap: 10px;
-    margin: 15px 0;
+.card-producto p:last-of-type {
+    font-size: 22px;
+    color: #553d2a;
+    font-weight: 700;
+    margin: 12px 0;
 }
-
-.botones-orden button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #553d2a;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s;
-    font-weight: bold;
-}
-
-.botones-orden button:hover {
-    background-color: #302217;
-}
-
-
-/* =========================================================
-   CARRITO
-   ========================================================= */
-#contenedorCarrito {
-    width: 100%;
-    background-color: #f7f8fa;
-    border: #d0d0d0 2px solid;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#contenedorCarrito li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 640px;
-}
-
-.total-contenedor {
-    align-self: flex-end;
-    margin-top: auto;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 10px 0;
-}
-
-.boton-eliminar,
-.boton-vaciar {
-    height: 32px;
-    border: none;
-    padding: 5px 8px;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: red;
-    color: white;
-}
-
-.boton-vaciar {
-    width: 6%;
-    margin-left: 20px;
-}
-
-.boton-eliminar {
-    width: 10%;
-}
-
 
 /* =========================================================
    ESTILOS PARA LOS FORMULARIOS (CREAR / CONSULTAR / MODIFICAR)
@@ -236,42 +233,148 @@ nav.nav-secundario {
 .products-form,
 .products-form-amplio {
     background-color: white;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    padding: 35px;
+    border: 2px solid #e8e8e8;
+    border-radius: 20px;
     display: flex;
-    gap: 15px;
+    gap: 18px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
 }
 
 .products-form {
     flex-direction: column;
-    max-width: 400px;
-    width: 100%;
+    width: 450px;
 }
 
 .products-form-amplio {
     display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 650px;
+    align-items: center;
+}
+
+.products-form-amplio br {
+    display: none;
+}
+
+.products-form label,
+.products-form-amplio label {
+    font-weight: 700;
+    color: #553d2a;
+    font-size: 15px;
 }
 
 .products-form input,
 .products-form select,
 .products-form-amplio input,
 .products-form-amplio select {
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+    font-size: 15px;
+    transition: all 0.3s ease;
 }
 
-.products-form input[type="submit"] {
-    background-color: #553d2a;
+.products-form input:focus,
+.products-form select:focus,
+.products-form-amplio input:focus,
+.products-form-amplio select:focus {
+    outline: none;
+    border-color: #553d2a;
+    box-shadow: 0 0 0 4px rgba(85, 61, 42, 0.1);
+}
+
+.products-form input[type="submit"],
+.products-form-amplio input[type="submit"] {
+    background: linear-gradient(135deg, #553d2a 0%, #6b4d35 100%);
     color: white;
-    height: 40px;
+    height: 48px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    grid-column: 1 / -1;
+    box-shadow: 0 4px 12px rgba(85, 61, 42, 0.3);
+    border: none;
 }
 
-.products-form input[type="submit"]:hover {
-    background-color: #302217;
+.products-form input[type="submit"]:hover,
+.products-form-amplio input[type="submit"]:hover {
+    background: linear-gradient(135deg, #6b4d35 0%, #553d2a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(85, 61, 42, 0.4);
+}
+
+
+/* =========================================================
+   FORMULARIO DE LOGIN
+   ========================================================= */
+#login-form {
+    background-color: white;
+    padding: 50px 45px;
+    border: 2px solid #e8e8e8;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 450px;
+    margin: 80px auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+#login-form label {
+    font-weight: 700;
+    color: #553d2a;
+    font-size: 15px;
+}
+
+#login-form input[type="email"],
+#login-form input[type="password"] {
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+#login-form input:focus {
+    outline: none;
+    border-color: #553d2a;
+    box-shadow: 0 0 0 4px rgba(85, 61, 42, 0.1);
+}
+
+#login-form .btn-login {
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+#login-form input[type="submit"] {
+    background: linear-gradient(135deg, #553d2a 0%, #6b4d35 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(85, 61, 42, 0.3);
+}
+
+#login-form input[type="submit"]:hover {
+    background: linear-gradient(135deg, #6b4d35 0%, #553d2a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(85, 61, 42, 0.4);
+}
+
+#login-form input[type="button"] {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+#login-form input[type="button"]:hover {
+    background: linear-gradient(135deg, #5a6268 0%, #545b62 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(108, 117, 125, 0.4);
 }
 
 
@@ -280,30 +383,49 @@ nav.nav-secundario {
    ========================================================= */
 .producto-card {
     background: white;
-    border: 2px #d0d0d0 solid;
-    border-radius: 10px;
-    padding: 20px;
+    border: 2px solid #e8e8e8;
+    border-radius: 20px;
+    padding: 30px;
     display: flex;
-    gap: 20px;
+    gap: 25px;
     align-items: center;
     margin: 20px auto;
-    width: 600px;
-    min-height: 150px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    width: 650px;
+    min-height: 180px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.producto-card:hover {
+    border-color: #553d2a;
+    box-shadow: 0 12px 30px rgba(85, 61, 42, 0.15);
+    transform: translateY(-5px);
 }
 
 .product-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 6px;
+    width: 140px;
+    height: 140px;
+    border-radius: 12px;
     object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .detalles-producto {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
     flex: 1;
+}
+
+.detalles-producto p {
+    margin: 4px 0;
+    color: #666;
+    font-size: 15px;
+}
+
+.detalles-producto strong {
+    color: #302217;
+    font-weight: 700;
 }
 
 
@@ -311,48 +433,61 @@ nav.nav-secundario {
    BOTONES DE ACCION (ELIMINAR / MODIFICAR)
    ========================================================= */
 .delete-button {
-    height: 32px;
+    padding: 10px 20px;
     border: none;
-    padding: 5px 12px;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    font-weight: bold;
-    background-color: #dc3545;
+    font-weight: 700;
+    font-size: 13px;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
 }
 
 .delete-button:hover {
-    background-color: #b82d3a;
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
 
 .update_button {
-    height: 32px;
+    padding: 10px 20px;
     border: none;
-    padding: 5px 12px;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    font-weight: bold;
-    background-color: #33388A;
+    font-weight: 700;
+    font-size: 13px;
+    background: linear-gradient(135deg, #33388A 0%, #181A47 100%);
     color: white;
+    box-shadow: 0 2px 8px rgba(51, 56, 138, 0.3);
 }
 
 .update_button:hover {
-    background-color: #181A47;
+    background: linear-gradient(135deg, #181A47 0%, #0d0f24 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(51, 56, 138, 0.4);
 }
+
 
 /* =========================================================
-   MANEJO DE ERRORES
+   MANEJO DE ERRORES Y MENSAJES
    ========================================================= */
-
-.message-error strong {
-    color: #ae4f4e;
+.message-error,
+.error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 2px solid #f5c6cb;
+    padding: 18px 30px;
+    border-radius: 12px;
+    font-size: 16px;
+    margin: 20px auto;
+    width: 650px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
 }
 
-.message-error {
-    color: #a94442;
-    background-color: white;
-    border: 2px solid #ebcdd1;
-    padding: 10px 30px;
-    border-radius: 4px;
-    font-size: 16px;
+.message-error strong,
+.error-message strong {
+    color: #721c24;
+    font-weight: 700;
 }
