@@ -1,0 +1,358 @@
+/* =========================================================
+   ESTILOS GENERALES
+   ========================================================= */
+* {
+    list-style: none;
+}
+
+   body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.90),
+            rgba(255, 255, 255, 0.90)
+        ),
+        url("https://e1.pxfuel.com/desktop-wallpaper/32/302/desktop-wallpaper-musical-instrument-backgrounds-vector-background-on-musical-instruments.jpg");
+
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+
+/* =========================================================
+   NAV PRINCIPAL
+   ========================================================= */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #553d2a;
+    color: white;
+    height: 55px;
+    padding: 0 20px;
+}
+
+nav.nav-secundario {
+    display: block;
+}
+
+.titulo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#barraBusqueda {
+    padding: 8px;
+    width: 220px;
+    border: none;
+    border-radius: 4px;
+}
+
+
+/* =========================================================
+   NAV SECUNDARIO
+   ========================================================= */
+.nav-secundario {
+    background-color: #302217;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.nav-secundario .nav-links {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-secundario .nav-links li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+}
+
+.nav-secundario .nav-links li a:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 5px;
+}
+
+
+/* =========================================================
+   HOME – LISTADO DE PRODUCTOS
+   ========================================================= */
+#contenedor-productos {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.card-producto {
+    background-color: white;
+    width: 180px;
+    height: 220px;
+    border: 2px solid #d0d0d0;
+    border-radius: 10px;
+    padding: 15px 10px;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-producto:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+.card-producto img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.card-producto h5 {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.card-producto p {
+    margin: 2px 0;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BOTONES DE ORDENAMIENTO
+   ========================================================= */
+.botones-orden {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.botones-orden button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #553d2a;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.botones-orden button:hover {
+    background-color: #302217;
+}
+
+
+/* =========================================================
+   CARRITO
+   ========================================================= */
+#contenedorCarrito {
+    width: 100%;
+    background-color: #f7f8fa;
+    border: #d0d0d0 2px solid;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contenedorCarrito li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 640px;
+}
+
+.total-contenedor {
+    align-self: flex-end;
+    margin-top: auto;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 0;
+}
+
+.boton-eliminar,
+.boton-vaciar {
+    height: 32px;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+}
+
+.boton-vaciar {
+    width: 6%;
+    margin-left: 20px;
+}
+
+.boton-eliminar {
+    width: 10%;
+}
+
+
+/* =========================================================
+   ESTILOS PARA LOS FORMULARIOS (CREAR / CONSULTAR / MODIFICAR)
+   ========================================================= */
+.products-form,
+.products-form-amplio {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    gap: 15px;
+}
+
+.products-form {
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+}
+
+.products-form-amplio {
+    display: grid;
+}
+
+.products-form input,
+.products-form select,
+.products-form-amplio input,
+.products-form-amplio select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.products-form input[type="submit"] {
+    background-color: #553d2a;
+    color: white;
+    height: 40px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.products-form input[type="submit"]:hover {
+    background-color: #302217;
+}
+
+
+/* =========================================================
+   CARDS DE LOS PRODUCTOS – CONSULTAR / MODIFICAR / ELIMINAR
+   ========================================================= */
+.producto-card {
+    background: white;
+    border: 2px #d0d0d0 solid;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 20px auto;
+    width: 600px;
+    min-height: 150px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.product-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.detalles-producto {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+
+/* =========================================================
+   BOTONES DE ACCION (ELIMINAR / MODIFICAR)
+   ========================================================= */
+.delete-button {
+    height: 32px;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #b82d3a;
+}
+
+.update_button {
+    height: 32px;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #33388A;
+    color: white;
+}
+
+.update_button:hover {
+    background-color: #181A47;
+}
+
+/* =========================================================
+   MANEJO DE ERRORES
+   ========================================================= */
+
+.message-error strong {
+    color: #ae4f4e;
+}
+
+.message-error {
+    color: #a94442;
+    background-color: white;
+    border: 2px solid #ebcdd1;
+    padding: 10px 30px;
+    border-radius: 4px;
+    font-size: 16px;
+}

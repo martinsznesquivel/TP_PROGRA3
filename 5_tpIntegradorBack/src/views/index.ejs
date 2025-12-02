@@ -1,0 +1,28 @@
+<%- include ("partials/head.ejs") %>    
+<%- include ("partials/nav.ejs") %>
+    
+    <main>
+        <h1><%= about %> </h1>
+
+        <div class="botones-orden">
+            <button onclick="ordenarPorNombre()">Ordenar por nombre</button>
+            <button onclick="ordenarPorPrecio()">Ordenar por precio</button>
+        </div>
+        
+        <div id="totalCarrito"></div>
+        
+        <div id="contenedor-productos">
+        <!-- Se itera el array de productos que pasamos desde el endpoint -->
+        <% productos.forEach(producto => { %>
+                    <div class="card-producto">
+                    <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                    <h5><%= producto.nombre %></h5>
+                    <p>ID: <%= producto.id %></p>
+                    <p>$<%= producto.precio %></p>
+                </div>
+        <%  }) %>
+        </div>
+    </main> 
+
+<%- include ("partials/footers.ejs") %>
+
