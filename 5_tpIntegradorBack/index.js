@@ -10,10 +10,10 @@ const PORT = environments.port;
 import cors from "cors"; 
 
 // Se importan los middlewares
-import { loggerUrl, validateId } from "./src/api/middlewares/middlewares.js";
+import { loggerUrl } from "./src/api/middlewares/middlewares.js";
 
 // Se importan las rutas de producto
-import { productRoutes } from "./src/api/routes/index.js";
+import { productRoutes, salesRoutes } from "./src/api/routes/index.js";
 
 // Se importa la configuracion para trabajar con rutas y archivos estaticos
 import { join, __dirname } from "./src/api/utils/index.js";
@@ -89,6 +89,7 @@ app.get("/modificar", (req, res) => {
 
 app.use("/api/productos", productRoutes)
 
+app.use("/api/ventas",salesRoutes);
 
 
 
