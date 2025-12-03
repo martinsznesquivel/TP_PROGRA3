@@ -25,9 +25,16 @@ router.delete("/:id", validateId, removeProduct);
 router.post("/", createProduct);
 
 router.post("/upload", multerUploader.single("image"), (req, res) => {
-    console.log("Imagen subida correctamente");
-    console.log(req.file)
-
+    if (!req.file) {
+        return res.status(400).json({ error: "No se subió ningún archivo" });
+    }
+    
+    res.status(200).json({
+        message: "Imagen subida correctamente",
+        payload: {
+            url: req.file.filename,
+            originalName: req.file.originalname
+        }
+    });
 });
-
 export default router
