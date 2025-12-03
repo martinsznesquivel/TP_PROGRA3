@@ -4,28 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Bienvenida</title>
-    <link rel="stylesheet" href="CSS/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <script src="js/bienvenida.js" defer></script>
-</head>
-<body>
-
-<header class="barra-nav">
-    <div class="logo-contenedor">
-        <span class="icono-logo">🎵</span>
-        <h1 class="nombre-tienda">Musical-shop</h1>
-    </div>
-
     
-</header>
+</head>
+<body class="pagina-bienvenida">
+    <header class="header-bienvenida">
+        <img src="img/pagina_logo (1).png" class="logo-img" alt="logo shop">
+        <h2 class="nombre-tienda">Musical shop</ h2>
+    </header>
 
-<main class="bienvenida">
-    <section class="tarjeta-bienvenida">
+    <main class="main-bienvenida">
+
         <h1>Bienvenido a la Tienda de Música</h1>
-        <p>Ingresá tu nombre para continuar 🎵</p>
 
-        <input type="text" id="nombreUsuario" class="input-nombre" placeholder="Tu nombre..." required>
-        <button id="btnEntrar" class="btn-entrar">Entrar a la tienda 🎶</button>
-    </section>
-</main>
+        <h4>Ingresá tu nombre para continuar 🎵</h4>
+
+        <form id="form-bienvenida"">
+            <input type="text" id="nombreUsuario" class="input-nombre" placeholder="Tu nombre..." required>
+            <input type="submit" class="btn-enviar" value="Enviar">
+        </form>
+  
+    </main>
 </body>
 </html>

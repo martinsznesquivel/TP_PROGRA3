@@ -1,7 +1,7 @@
 // Variables
 let productos = [];
 let productosFiltrados = [];
-const conenedoProductos = document.getElementById("listaProductos");
+const contenedorProductos = document.getElementById("listaProductos");
 const barraBusqueda = document.getElementById("barraBusqueda");
 
 // Carrito: se guarda en localStorage
@@ -14,7 +14,7 @@ async function cargarProductos() {
         if (!response.ok) throw new Error("Error al traer productos");
 
         const data = await response.json();
-        productos = data.payload.filter(p => p.activo);
+        productos = data.payload.filter(p => p.activo === 1 || p.activo === 0);
         productosFiltrados = [...productos];
         return productos;
     } catch (error) {
@@ -24,9 +24,9 @@ async function cargarProductos() {
 
 // Mostrar productos
 function mostrarProductos(lista) {
-    conenedoProductos.innerHTML = "";
+    contenedorProductos.innerHTML = "";
     lista.forEach(prod => {
-        conenedoProductos.innerHTML += `
+        contenedorProductos.innerHTML += `
             <div class="producto-card">
                 <img src="${prod.imagen}" alt="${prod.nombre}">
                 <h3>${prod.nombre}</h3>

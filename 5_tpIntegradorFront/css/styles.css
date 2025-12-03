@@ -1,4 +1,4 @@
-/* RESET */
+/* ================== RESET ================== */
 * {
     box-sizing: border-box;
     max-width: 100%;
@@ -13,19 +13,89 @@ html, body {
     overflow-x: hidden;
 }
 
-/* nav*/
+/* ================== BIENVENIDA ================== */
+.pagina-bienvenida .header-bienvenida {
+    width: 100%;
+    background-color: #C62828;
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagina-bienvenida .logo-img {
+    height: 50px;
+}
+
+.pagina-bienvenida .nombre-tienda {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.pagina-bienvenida .main-bienvenida {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+}
+
+.pagina-bienvenida .main-bienvenida h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.pagina-bienvenida .main-bienvenida h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#form-bienvenida {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.input-nombre {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #999;
+    font-size: 16px;
+}
+
+.btn-enviar {
+    padding: 12px;
+    background-color: #C62828;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-enviar:hover {
+    background-color: #b02020;
+}
+
+/* ================== PRODUCTOS ================== */
+/* Header nav */
 .barra-nav {
     width: 100%;
     background-color: #C62828;
     color: white;
-
     padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* Logo nav*/
 .logo-contenedor {
     display: flex;
     align-items: center;
@@ -36,17 +106,34 @@ html, body {
     font-size: 28px;
 }
 
-.nombre-tienda {
-    font-size: 20px;
-    margin: 0;
+.barra-nav .nombre-tienda {
+    font-size: 24px;
     font-weight: bold;
+    margin: 0;
 }
 
-/* inicio y carrito nav */
+/* Buscador */
+.buscador-contenedor {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.buscador {
+    width: 90%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #777;
+    font-size: 16px;
+}
+
+/* Nav derecha */
 .nav-derecha {
     display: flex;
     gap: 15px;
 }
+
 .enlace-nav {
     color: white;
     text-decoration: none;
@@ -59,90 +146,12 @@ html, body {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/*Main*/
-.bienvenida {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    padding: 10px;
-}
-
-.tarjeta-bienvenida {
-    background: white;
-    padding: 30px;
-    border-radius: 14px;
-    width: 100%;
-    max-width: 450px;
-    text-align: center;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.2);
-    color: black;
-}
-
-/* BOTÓN */
-.btn-entrar {
-    display: inline-block;
-    margin-top: 15px;
-    background: #C62828;
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    font-size: 18px;
-    border-radius: 10px;
-}
-
-.btn-entrar:hover {
-    background: #b02020;
-}
-
-/* INPUT */
-.input-nombre {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #999;
-    margin-top: 15px;
-    font-size: 16px;
-}
-/*FOOTER*/
-.footer {
-    background-color: #222;
-    color: #fff;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 14px;
-    /* position: fixed;  <-- QUITAR */
-    /* bottom: 0;        <-- QUITAR */
-    width: 100%;
-}
-
-/*
-=====================
-Productos vista
-=====================
-
-*/
-/* CONTENEDOR GENERAL */
+/* Main productos */
 .contenedor-productos {
     width: 100%;
     padding: 20px;
 }
 
-/* Buscador dentro del nav */
-.buscador-contenedor {
-    flex: 1;  /* Ocupa espacio del medio */
-    display: flex;
-    justify-content: center;
-}
-.buscador {
-    width: 90%;
-    max-width: 400px;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #777;
-    font-size: 16px;
-}
-
-/* BOTONES ORDENAR */
 .ordenamiento {
     text-align: center;
     margin-bottom: 20px;
@@ -155,13 +164,13 @@ Productos vista
     color: white;
     border: none;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .btn-orden:hover {
-    background: #b02020;
+    background-color: #b02020;
 }
 
-/* TARJETAS DE PRODUCTOS */
 .lista-productos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -187,8 +196,19 @@ Productos vista
     color: white;
     border: none;
     border-radius: 7px;
+    cursor: pointer;
 }
 
 .producto-card button:hover {
     background: #b02020;
+}
+
+/* Footer */
+.footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    width: 100%;
 }
