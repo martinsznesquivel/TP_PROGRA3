@@ -25,6 +25,7 @@ import nodemon from "nodemon";
 const SESSION_KEY = environments.session_key;
 
 import { handleMulterError } from "./src/api/middlewares/multer_middleware.js";
+import { comparePassword, hashPassword } from "./src/api/utils/bcrypt.js";
 
 // Middleware que permite la realizacion de solicitudes
 app.use(cors()); 
@@ -147,6 +148,7 @@ app.get("/login", (req, res) => {
 })
 
 // Endpoint para iniciar sesion
+/*
 app.post("/login", async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -171,6 +173,58 @@ app.post("/login", async (req, res) => {
       }
 
       const user = rows[0];
+      console.table(user);
+
+      // Con el mail y contraseñas validados, guardamos la sesion
+      req.session.user = {
+        id: user.id,
+        nombre: user.nombre,
+        email: user.email
+      }
+
+      res.redirect("/") // Redirigimos a la pagina principal
+
+    } catch (error) {
+      console.error("Error en el login ", error)
+    }
+})
+    */
+
+// Login con contraseña hasheada
+app.post("/login", async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      console.log(await hashPassword(password));
+
+      if (!email || !password) {
+        return res.render("login", {
+          title : "Login",
+          about : "Login dashboard",
+          error : "Todos los campos son obligatorios"
+        });
+      }
+
+      const sql = "SELECT * FROM usuario WHERE email = ?";
+      const [rows] = await connection.query(sql, [email]);
+      
+      if(rows.length === 0) {
+        return res.render("login", {
+          title : "Login",
+          about : "Login dashboard",
+          error : "Credenciales incorrectas"
+        })
+      }
+
+      const user = rows[0];
+      const isMatch = await comparePassword(password, user.password)
+      if(!isMatch){
+        return res.render("login", {
+          title : "Login",
+          about : "Login dashboard",
+          error : "Credenciales incorrectas"
+        })
+      }
+
       console.table(user);
 
       // Con el mail y contraseñas validados, guardamos la sesion
