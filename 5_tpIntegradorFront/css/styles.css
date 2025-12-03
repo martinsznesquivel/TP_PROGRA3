@@ -200,3 +200,91 @@ Productos vista
 .producto-card button:hover {
     background: #b02020;
 }
+
+/*
+==================
+Carrito
+==================
+*/
+
+.carrito-contenedor {
+    width: 100%;
+    max-width: 950px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* Título */
+.titulo-carrito {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+/* Lista de productos */
+.carrito-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Tarjeta */
+.item-carrito {
+    position: relative;
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    display: flex;
+    gap: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* Imagen del producto */
+.item-carrito img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 2px solid #ddd;
+}
+
+/* Información del producto */
+.item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+.item-info h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.item-info p {
+    margin: 0;
+    font-size: 17px;
+    color: #444;
+}
+
+
+.btn-eliminar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    background: #C62828;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-eliminar:hover {
+    background: #b02020;
+}
