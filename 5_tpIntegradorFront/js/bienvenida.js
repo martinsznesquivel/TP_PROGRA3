@@ -8,5 +8,5 @@ botonEntrar = document.getElementById("btnEntrar");
         // Si ingresó un nombre, lo guardás o lo redirigís
         localStorage.setItem("usuario", nombreUsuario);
         console.log(nombreUsuario);
-        window.location.href = "index.html";
+        window.location.href = "productos.html";
     })

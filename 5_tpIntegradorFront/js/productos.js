@@ -41,7 +41,7 @@ function mostrarProductos(lista) {
 // Filtrar productos
 function filtrarProductos() {
     const valorBusqueda = barraBusqueda.value.trim().toLowerCase();
-    productosFiltrados = productos.filter(p => p.nombre.toLowerCase().startsWith(valorBusqueda));
+    productosFiltrados = productos.filter(p => p.nombre.toLowerCase().includes(valorBusqueda));
     mostrarProductos(productosFiltrados);
 }
 
