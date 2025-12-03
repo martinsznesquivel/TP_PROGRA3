@@ -16,9 +16,11 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 async function cargarProductos() {
     try {
         const response = await fetch("http://localhost:3000/api/productos");
-        if (!response.ok) throw new Error("Error al traer productos");
-
+        if (!response.ok){
+            return [];
+        } 
         const data = await response.json();
+
         productos = data.payload.filter(p => p.activo);
         productosFiltrados = [...productos];
         return productos;
@@ -43,7 +45,7 @@ function mostrarProductos(lista) {
     });
 }
 
-// Filtrar productos
+//filtro para barra de busqueda
 function filtrarProductos() {
     const valorBusqueda = barraBusqueda.value.trim().toLowerCase();
     productosFiltrados = productos.filter(p => p.nombre.toLowerCase().startsWith(valorBusqueda));
@@ -55,7 +57,6 @@ function ordenarPorNombre() {
     mostrarProductos(copia);
     productosFiltrados = copia;
 }
-
 function ordenarPorPrecio() {
     const copia = [...productosFiltrados].sort((a, b) => a.precio - b.precio);
     mostrarProductos(copia);
@@ -64,7 +65,9 @@ function ordenarPorPrecio() {
 
 function agregarAlCarrito(id) {
     const producto = productos.find(p => p.id === id);
-    if (!producto) return;
+    if (!producto){
+        return
+    }
 
     carrito.push(producto);
     localStorage.setItem("carrito", JSON.stringify(carrito));
