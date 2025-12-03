@@ -63,15 +63,22 @@ function ordenarPorPrecio() {
     productosFiltrados = copia;
 }
 
+// Agregar productos al carrito
 function agregarAlCarrito(id) {
     const producto = productos.find(p => p.id === id);
-    if (!producto){
-        return
+    const productosEnCarrito = carrito.find(p => p.id === id);
+    
+    if (productosEnCarrito){
+        // Si ya existe un producto en el carrito, aumenta la cantidad en 1
+        productosEnCarrito.cantidad += 1;
+    } else {
+        carrito.push({
+            ...producto, // Acá copiamos todas las propiedades de ese producto
+            cantidad: 1 // Acá agregamos la propiedad de cantidad (no está en el back, la maneja el front)
+        });
     }
 
-    carrito.push(producto);
     localStorage.setItem("carrito", JSON.stringify(carrito));
-
     alert(`Producto "${producto.nombre}" agregado al carrito!`);
 }
 
