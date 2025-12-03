@@ -1,7 +1,12 @@
+let nombreUsuario = sessionStorage.getItem("nombreUsuario");
+if(!nombreUsuario){
+    window.location.href = "bienvenida.html";
+}
+
 // Variables
 let productos = [];
 let productosFiltrados = [];
-const contenedorProductos = document.getElementById("listaProductos");
+const conenedoProductos = document.getElementById("listaProductos");
 const barraBusqueda = document.getElementById("barraBusqueda");
 
 // Carrito: se guarda en localStorage
@@ -14,7 +19,7 @@ async function cargarProductos() {
         if (!response.ok) throw new Error("Error al traer productos");
 
         const data = await response.json();
-        productos = data.payload.filter(p => p.activo === 1 || p.activo === 0);
+        productos = data.payload.filter(p => p.activo);
         productosFiltrados = [...productos];
         return productos;
     } catch (error) {
@@ -24,9 +29,9 @@ async function cargarProductos() {
 
 // Mostrar productos
 function mostrarProductos(lista) {
-    contenedorProductos.innerHTML = "";
+    conenedoProductos.innerHTML = "";
     lista.forEach(prod => {
-        contenedorProductos.innerHTML += `
+        conenedoProductos.innerHTML += `
             <div class="producto-card">
                 <img src="${prod.imagen}" alt="${prod.nombre}">
                 <h3>${prod.nombre}</h3>
@@ -41,7 +46,7 @@ function mostrarProductos(lista) {
 // Filtrar productos
 function filtrarProductos() {
     const valorBusqueda = barraBusqueda.value.trim().toLowerCase();
-    productosFiltrados = productos.filter(p => p.nombre.toLowerCase().includes(valorBusqueda));
+    productosFiltrados = productos.filter(p => p.nombre.toLowerCase().startsWith(valorBusqueda));
     mostrarProductos(productosFiltrados);
 }
 

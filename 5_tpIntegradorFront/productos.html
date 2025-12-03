@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Musical shop</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <script defer src="js/productos.js"></script>
+</head>
 
-    <link rel="stylesheet" href="CSS/styles.css" />
-  </head>
-  <body>
-    <header class="barra-nav">
-      <div class="logo-contenedor">
+<body>
+
+<header class="barra-nav">
+    <div class="logo-contenedor">
         <span class="icono-logo">🎵</span>
         <h1 class="nombre-tienda">Musical-shop</h1>
-      </div>
-
-      <div class="buscador-contenedor">
-        <input
-          type="text"
-          id="barraBusqueda"
-          placeholder="Buscar producto..."
-          class="buscador"
-        />
-      </div>
-      <nav class="nav-derecha">
+    </div>
+    <!-- BARRA DE BÚSQUEDA -->
+    <div class="buscador-contenedor">
+        <input type="text" id="barraBusqueda" placeholder="Buscar producto..." class="buscador">
+    </div>
+    <nav class="nav-derecha">
         <a href="productos.html" class="enlace-nav">Productos</a>
         <a href="carrito.html" class="enlace-nav">Carrito 🛒</a>
-      </nav>
-    </header>
+    </nav>
+</header>
 
-    <main class="contenedor-productos">
-      <div class="ordenamiento">
+<main class="contenedor-productos">
+    
+    <!-- BOTONES DE ORDENAMIENTO -->
+    <div class="ordenamiento">
         <button id="ordenNombre" class="btn-orden">Ordenar por Nombre</button>
         <button id="ordenPrecio" class="btn-orden">Ordenar por Precio</button>
-      </div>
-      <img src="" alt="" />
+    </div>
+    <img src="" alt="">
 
-      <section id="listaProductos" class="lista-productos"></section>
-    </main>
-    <footer class="footer">
-      <p>Desarrollado por Thiago Formiga y Martin Esquivel🎵</p>
-    </footer>
-    <script src="js/productos.js" defer></script>
-  </body>
+    <!-- LISTA DE PRODUCTOS -->
+    <section id="listaProductos" class="lista-productos"></section>
+
+</main>
+<footer class="footer">
+    <p>© 2025 Musical-Shop. Todos los derechos reservados.</p>
+    <p>Desarrollado por Martin Esquivel y Thiago Formiga 🎵 </p>
+</footer>
+
+</body>
 </html>
