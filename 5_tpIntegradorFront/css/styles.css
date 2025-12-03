@@ -103,3 +103,92 @@ html, body {
     margin-top: 15px;
     font-size: 16px;
 }
+/*FOOTER*/
+.footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    /* position: fixed;  <-- QUITAR */
+    /* bottom: 0;        <-- QUITAR */
+    width: 100%;
+}
+
+/*
+=====================
+Productos vista
+=====================
+
+*/
+/* CONTENEDOR GENERAL */
+.contenedor-productos {
+    width: 100%;
+    padding: 20px;
+}
+
+/* Buscador dentro del nav */
+.buscador-contenedor {
+    flex: 1;  /* Ocupa espacio del medio */
+    display: flex;
+    justify-content: center;
+}
+.buscador {
+    width: 90%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #777;
+    font-size: 16px;
+}
+
+/* BOTONES ORDENAR */
+.ordenamiento {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-orden {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #C62828;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-orden:hover {
+    background: #b02020;
+}
+
+/* TARJETAS DE PRODUCTOS */
+.lista-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.producto-card {
+    background: white;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.producto-card h3 {
+    margin: 10px 0;
+}
+
+.producto-card button {
+    padding: 8px 12px;
+    background: #C62828;
+    color: white;
+    border: none;
+    border-radius: 7px;
+}
+
+.producto-card button:hover {
+    background: #b02020;
+}
