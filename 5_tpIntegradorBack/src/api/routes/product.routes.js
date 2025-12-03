@@ -7,6 +7,7 @@ import { validateId } from "../middlewares/middlewares.js";
 
 // Traemos la conexion a la BBDD
 import { createProduct, getAllProducts, getProductById, modifyProduct, removeProduct } from "../controllers/product.controllers.js";
+import { multerUploader } from "../middlewares/multer_middleware.js";
 
 // Traer los productos
 router.get("/", getAllProducts);
@@ -22,5 +23,11 @@ router.delete("/:id", validateId, removeProduct);
 
 // Crear nuevos productos
 router.post("/", createProduct);
+
+router.post("/upload", multerUploader.single("image"), (req, res) => {
+    console.log("Imagen subida correctamente");
+    console.log(req.file)
+
+});
 
 export default router

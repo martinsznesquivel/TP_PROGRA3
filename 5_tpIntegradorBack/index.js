@@ -24,11 +24,15 @@ import { render } from "ejs";
 import nodemon from "nodemon";
 const SESSION_KEY = environments.session_key;
 
+import { handleMulterError } from "./src/api/middlewares/multer_middleware.js";
+
 // Middleware que permite la realizacion de solicitudes
 app.use(cors()); 
 
 // Middleware logger
 app.use(loggerUrl)
+
+app.use(handleMulterError)
 
 app.use(express.json()); 
 
@@ -63,6 +67,8 @@ app.use(session({
 /*=======================
       Configuracion
 =======================*/
+
+
 
 app.set("view engine", "ejs") // Para configurar ejs como motor de plantillas
 
@@ -121,6 +127,16 @@ app.get("/modificar", requireLogin, (req, res) => {
         about: "Modificar producto por id" // Le devolvemos la pagina
     }); 
 })
+
+// Subir imagenes
+app.get("/subirImagen", requireLogin, (req, res) => {
+  
+  res.render("subirImagen", {
+        title: "subirImagen",
+        about: "Subi tu imagen" // Le devolvemos la pagina
+    }); 
+})
+
 
 // Vista de login
 app.get("/login", (req, res) => {
