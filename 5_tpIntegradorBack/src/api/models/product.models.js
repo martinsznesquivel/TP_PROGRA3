@@ -7,7 +7,7 @@ import connection from "../database/db.js";
 // Traer todos los productos
 
 const selectAllProducts = () => {
-     const sql = "SELECT * FROM productos";
+     const sql = "SELECT * FROM productos WHERE activo = 1";
 
     //la conexion devuelve dos campos, rows el resultado de la tabla y fields la informacion
     return connection.query(sql);
@@ -48,15 +48,11 @@ const updateProducts = (nombre, categoria, imagen, activo, precio, id) => {
 // ELiminar productos
 
 const deleteProducts = (id) => {
-        let sql = `DELETE FROM productos WHERE id = ?`;
-        let sql2 = `UPDATE products set active = 0 WHERE id = ?`;
 
+        let sql = `UPDATE productos set activo = 0 WHERE id = ?`;
+ 
         return connection.query(sql, [id]);
 }
-
-
-
-
 
 
 export default {

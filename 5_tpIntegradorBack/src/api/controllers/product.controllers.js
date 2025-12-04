@@ -128,13 +128,13 @@ export const removeProduct = async (req, res) => {
         let [result] = await ProductModel.deleteProducts(id);
 
         if (result.affectedRows === 0) {
-        return res.status(400).json({
-            message: `No se eliminó el producto con id ${id}`,
+        return res.status(404).json({
+            message: `No se existe el producto con id ${id}`,
         });
         }
 
         res.status(200).json({
-        message: `Producto con id ${id} eliminado correctamente`,
+        message: `Producto con id ${id} desactivado correctamente`,
         });
 
   } catch (error) {
