@@ -133,6 +133,12 @@ function generarTicketPDF(venta) {
     let y = 15;
     const anchoPagina = pdf.internal.pageSize.getWidth();
 
+    // NOMBRE DE LA APP
+    pdf.setFontSize(24);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("MUSICAL-SHOP", anchoPagina / 2, y, { align: "center" });
+    y += 12;
+
     // TÍTULO
     pdf.setFontSize(20);
     pdf.text("TICKET DE COMPRA", anchoPagina / 2, y, { align: "center" });
@@ -179,13 +185,16 @@ function generarTicketPDF(venta) {
     y += 5;
     pdf.setFontSize(16);
     pdf.text(`TOTAL: $${total}`, 15, y);
+    
+    //PIE DE PAGINA
     y += 15;
-
     pdf.setFontSize(13);
     pdf.text("¡GRACIAS POR SU COMPRA!", anchoPagina / 2, y, { align: "center" });
+    y += 5;
+    pdf.text("Musical-Shop © 2025", anchoPagina / 2, y, { align: "center" });
 
     //GUARDAR
-    pdf.save("ticket.pdf");
+    pdf.save(`ticket_${venta.nombre_usuario}.pdf`);
 }
 
 
@@ -194,6 +203,12 @@ function generarTicketPDF(venta) {
 async function finalizarCompra() {
     if (carrito.length === 0) {
         alert("El carrito está vacío.");
+        return;
+    }
+
+    const confirmar = confirm("¿Estás seguro de que quieres realizar la compra?");
+
+    if(!confirmar){
         return;
     }
 
