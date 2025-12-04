@@ -82,6 +82,8 @@ function agregarAlCarrito(id) {
     alert(`Producto "${producto.nombre}" agregado al carrito!`);
 }
 
+// Funcion para cerrar sesion / salir
+
 function salirSistema() {
     const confirmar = confirm("¿Estás seguro de salir de la sesion? Se perderá todo tu carrito");
 
@@ -95,6 +97,12 @@ function salirSistema() {
     }
 }
 
+// Función para acceder al panel de administración
+function irAlPanelAdmin() {
+    // Redirige al login del backend
+    window.location.href = "http://localhost:3000/login";
+}
+
 // Inicializar
 async function init() {
     await cargarProductos();
@@ -104,6 +112,7 @@ async function init() {
     document.getElementById("ordenNombre").addEventListener("click", ordenarPorNombre);
     document.getElementById("ordenPrecio").addEventListener("click", ordenarPorPrecio);
     document.getElementById("btnSalir").addEventListener("click", salirSistema);
+    document.getElementById("btnAdmin").addEventListener("click", irAlPanelAdmin);
 }
 
 init();

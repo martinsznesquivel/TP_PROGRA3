@@ -242,6 +242,8 @@ async function finalizarCompra() {
     }
 }
 
+// Funcion para cerrar sesion / salir
+
 function salirSistema() {
     const confirmar = confirm("¿Estás seguro de salir de la sesion? Se perderá todo tu carrito");
 
@@ -255,10 +257,17 @@ function salirSistema() {
     }
 }
 
+// Función para acceder al panel de administración
+function irAlPanelAdmin() {
+    // Redirige al login del backend
+    window.location.href = "http://localhost:3000/login";
+}
+
 // Hacer la función global para que funcione desde onclick
 window.cambiarCantidad = cambiarCantidad;
 // Le agregamos event listener al boton de salir
 document.getElementById("btnSalir").addEventListener("click", salirSistema);
+document.getElementById("btnAdmin").addEventListener("click", irAlPanelAdmin);
 
 // Se inicializa el carrito
 mostrarCarrito();
