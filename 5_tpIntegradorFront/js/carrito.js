@@ -242,8 +242,23 @@ async function finalizarCompra() {
     }
 }
 
+function salirSistema() {
+    const confirmar = confirm("¿Estás seguro de salir de la sesion? Se perderá todo tu carrito");
+
+    if (confirmar){
+        //Limpiamos sessionStorage (el usuario)
+        sessionStorage.removeItem("nombreUsuario");
+        // Limpiamos localStorage (el carrito)
+        localStorage.removeItem("carrito");
+        // Redirigimos al inicio
+        window.location.href = "bienvenida.html";
+    }
+}
+
 // Hacer la función global para que funcione desde onclick
 window.cambiarCantidad = cambiarCantidad;
+// Le agregamos event listener al boton de salir
+document.getElementById("btnSalir").addEventListener("click", salirSistema);
 
 // Se inicializa el carrito
 mostrarCarrito();
