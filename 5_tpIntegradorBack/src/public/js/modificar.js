@@ -98,10 +98,11 @@ function crearFormularioPut(event, producto) {
                       producto.precio
                     }" required>
 
-                    <input type="hidden" name="activo" value="${
-                      producto.activo
-                    }">
-
+                    <label for="activoProd">Estado</label>
+                    <select name="activo" id="activoProd">
+                        <option value="1" ${producto.activo == 1 ? "selected" : ""}>Activo</option>
+                        <option value="0" ${producto.activo == 0 ? "selected" : ""}>Inactivo</option>
+                    </select>
                     <br>
                     <input type="submit" value="Modificar Producto">
                 </form>

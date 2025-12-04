@@ -491,3 +491,16 @@ nav,
     color: #721c24;
     font-weight: 700;
 }
+
+/* =========================================================
+    Estilado para productos desactivados
+   ========================================================= */
+.card-producto.desactivado {
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
+
+.card-producto.desactivado:hover {
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
