@@ -8,6 +8,7 @@ let productos = [];
 let productosFiltrados = [];
 const conenedoProductos = document.getElementById("listaProductos");
 const barraBusqueda = document.getElementById("barraBusqueda");
+let categoriaActiva = "todos";
 
 // Carrito: se guarda en localStorage
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -108,11 +109,33 @@ async function init() {
     await cargarProductos();
     mostrarProductos(productosFiltrados);
 
+    // Botones para ordenamiento y login admin / logout
     barraBusqueda.addEventListener("input", filtrarProductos);
     document.getElementById("ordenNombre").addEventListener("click", ordenarPorNombre);
     document.getElementById("ordenPrecio").addEventListener("click", ordenarPorPrecio);
     document.getElementById("btnSalir").addEventListener("click", salirSistema);
     document.getElementById("btnAdmin").addEventListener("click", irAlPanelAdmin);
+
+    // Botones de filtro
+    document.getElementById("filtroTodos").addEventListener("click", () => filtrarPorCategoria("todos"));
+    document.getElementById("filtroCD").addEventListener("click", () => filtrarPorCategoria("CD"));
+    document.getElementById("filtroCassette").addEventListener("click", () => filtrarPorCategoria("cassette"));
+    document.getElementById("filtroVinilo").addEventListener("click", () => filtrarPorCategoria("vinilo"));
+}
+
+function filtrarPorCategoria(categoria) {
+    categoriaActiva = categoria;
+
+    document.querySelectorAll(".btn-filtro").forEach(btn => btn.classList.remove("active"));
+    document.getElementById(`filtro${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`).classList.add("active");
+
+    if (categoria === "todos") {
+        productosFiltrados = [...productos];
+    } else {
+        productosFiltrados = productos.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase());
+    }
+
+    mostrarProductos(productosFiltrados)
 }
 
 init();

@@ -24,6 +24,7 @@ router.delete("/:id", validateId, removeProduct);
 // Crear nuevos productos
 router.post("/", createProduct);
 
+// Subir imagenes
 router.post("/upload", multerUploader.single("image"), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: "No se subió ningún archivo" });

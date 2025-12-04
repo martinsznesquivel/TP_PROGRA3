@@ -10,8 +10,6 @@ altaProductsForm.addEventListener("submit", async (event) => {
   // creamos un objeto JS con los datos del objeto FormData
   let data = Object.fromEntries(formData.entries());
 
-  // Con el nuevo objeto JS creado usando los valores de los formularios, lo enviamos al servidor en un formato JSON
-
   enviarProducto(data);
 
   async function enviarProducto(data) {

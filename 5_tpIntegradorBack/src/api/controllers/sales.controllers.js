@@ -1,7 +1,7 @@
 import SalesModels from "../models/sales.models.js";
 
 //Traer todas las ventas
-export const getAllSales = async (req,res)=>{
+export const getAllSales = async (req,res)=>{   
     try{
         const [rows] = await SalesModels.selectAllSales();
         //Devuelvo las ventas

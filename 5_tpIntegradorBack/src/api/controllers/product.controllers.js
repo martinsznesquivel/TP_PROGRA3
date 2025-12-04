@@ -31,9 +31,10 @@ export const getAllProducts = async (req, res) => {
 export const getProductById = async (req, res) => {
   try {
 
-    //extraemos el valor id de la url, de toda la req solo usamos el id
+    //extraemos el valor id de la url haciendo destructuring. De la req solo usamos el id
     let { id } = req.params;
 
+    // En una variable rows guardamos el resultado / producto que nos devuelve el metodo selectProductsById
     const [rows] = await ProductModel.selectProductsById(id);
 
     // Comprobamos que exista un producto con ese id
@@ -65,13 +66,14 @@ export const createProduct = async (req, res) => {
   try {
     let { imagen, nombre, precio, categoria } = req.body;
 
+    // Validamos que todos los campos estén llenos
     if (!imagen || !nombre || !precio || !categoria) {
       return res.status(400).json({
         message: "Datos invalidos, asegurate de completar todos los campos",
       });
     }
 
-
+    // En una variable rows guardamos el resultado de la funcion insertProduct
     let [rows] = await ProductModel.insertProduct(imagen, nombre, precio, categoria);
 
     res.status(201).json({
@@ -93,12 +95,14 @@ export const modifyProduct = async (req, res) => {
   try {
     let { id, nombre, categoria, imagen, activo, precio } = req.body;
 
+    // Validamos que todos los campos estén llenos
     if (!id || !nombre || !categoria || !imagen || !activo || !precio) {
       return res.status(400).json({
         message: "Faltan campos requeridos",
       });
     }
 
+    // Guardamos el resultado que nos devuelve updateProducts en la variable result
     let [result] = await ProductModel.updateProducts(nombre, categoria, imagen, activo, precio, id);
 
     console.log(result);
@@ -123,8 +127,11 @@ export const modifyProduct = async (req, res) => {
 // DELETE -> Eliminar producto por id
 export const removeProduct = async (req, res) => {
   try {
+
+        // Guardamos en id los params de la request  
         let { id } = req.params;
 
+        // En result guardamos la respuesta que devuelve deleteProducts
         let [result] = await ProductModel.deleteProducts(id);
 
         if (result.affectedRows === 0) {

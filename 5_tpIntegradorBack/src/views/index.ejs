@@ -5,7 +5,7 @@
         <h1><%= about %> </h1>
         <hr>
         <div id="contenedor-productos">
-        <!-- Se itera el array de productos que pasamos desde el endpoint -->
+        <!-- Aca iteramos el array de productos que pasamos desde el endpoint -->
         <% productos.forEach(producto => { %>
                     <div class="card-producto <%= producto.activo == 0 ? 'desactivado' : '' %>">
                     <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">

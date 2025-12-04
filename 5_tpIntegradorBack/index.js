@@ -43,21 +43,6 @@ app.use(express.urlencoded( {extended: true})); // Para leer la info que nos env
 // Middleware para servir archivos estaticos: se construye una ruta relativa para servir los archivos de la carpeta /public
 app.use(express.static(join(__dirname, "src", "public")));
 
-/*======================
-    Sesiones en express
-========================
-Express sesion es un middleware que permite que Express recuerde datos entre peticiones
-Como HTTP es sin estado, Express no sabe quienes somos entre una ruta y otra, por lo que al iniciar sesion necesitamos guardar algo asi =
-req.session.user = {id: 12, name: "Javier"}
-
-En cualquier request futura 
-if(!req.session.user) {
-    return res.redirect("/login");
-    }
-
-Sin sesiones no hay forma de saber si el usuario está logueado a menos que usemos tokens JWT, cookies firmadas o algun otro sistema
-*/
-
 // Middleware de sesion, cada vez que un usuario hace una solicitud HTTP, se gestionará su sesion mediante el middleware
 app.use(session({
   secret: SESSION_KEY, // Firma las cookies para evitar manipulacion por el cliente para la seguridad de la aplicacion
@@ -68,8 +53,6 @@ app.use(session({
 /*=======================
       Configuracion
 =======================*/
-
-
 
 app.set("view engine", "ejs") // Para configurar ejs como motor de plantillas
 

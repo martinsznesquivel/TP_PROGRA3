@@ -9,7 +9,6 @@ import connection from "../database/db.js";
 const selectAllProducts = () => {
      const sql = "SELECT * FROM productos WHERE activo = 1";
 
-    //la conexion devuelve dos campos, rows el resultado de la tabla y fields la informacion
     return connection.query(sql);
 }
 

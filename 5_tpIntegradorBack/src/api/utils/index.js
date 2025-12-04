@@ -3,8 +3,6 @@
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
-// Logica para obtener el nombre del archivo actual
-
 // Se convierte las rutas file de la carpeta /public en rutas normales
 const __filename = fileURLToPath(import.meta.url);
 

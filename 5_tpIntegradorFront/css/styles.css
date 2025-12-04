@@ -549,3 +549,90 @@ h1, h2, h3 {
     background: #218838;
     border-color: #1e7e34;
 }
+
+/* ===========================================
+   BOTONES DE FILTRO POR CATEGORÍA
+   =========================================== */
+
+.filtros-categoria {
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.btn-filtro {
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 2px solid #dee2e6;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    min-width: 80px;
+}
+
+.btn-filtro:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+    transform: translateY(-1px);
+}
+
+.btn-filtro.active {
+    background-color: #C62828;
+    color: white;
+    border-color: #C62828;
+    box-shadow: 0 2px 8px rgba(198, 40, 40, 0.3);
+}
+
+.btn-filtro:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+        Responsive
+   ======================================*/
+@media (max-width: 768px) {
+    .barra-nav {
+        padding: 10px 15px;
+        height: auto;
+        min-height: 60px;
+    }
+    
+    .logo-contenedor {
+        gap: 8px;
+    }
+    
+    .icono-logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .nombre-tienda {
+        font-size: 18px;
+    }
+    
+    /* Ocultamos */
+    .buscador-contenedor {
+        display: none;
+    }
+    
+    .nav-derecha {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    
+    .enlace-nav {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    .btn-salir, .btn-admin {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+}

@@ -1,8 +1,8 @@
-import dotenv from "dotenv"; // Importamos el modulo dotenv para cargar archivos .env
+import dotenv from "dotenv"; // Importamos el modulo dotenv para cargar archivos .env y sus datos
 
 dotenv.config(); // Cargamos las variables de entorno desde el archivo.env
 
-// Vamos a exportar esta informacion del .env
+// Acá se exporta la informacion del .env
 export default {
     port: process.env.PORT,
     database: {
